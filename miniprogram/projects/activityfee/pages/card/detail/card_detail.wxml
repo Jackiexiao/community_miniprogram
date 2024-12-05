@@ -1,0 +1,44 @@
+<view>
+	<view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
+
+	<view wx:elif="{{isLoad === null}}" class="margin-top load notexist text-l load-project">
+		<text class="text-grey">名片不存在或已被删除</text>
+	</view>
+
+	<view wx:else class="card-detail">
+		<view class="card-header">
+			<image class="avatar" mode="aspectFill" src="{{card.USER_PIC}}" />
+			<view class="info">
+				<view class="name">{{card.USER_NAME}}</view>
+				<view class="time">{{card.USER_ADD_TIME}}</view>
+			</view>
+		</view>
+
+		<view class="card-body">
+			<view class="section">
+				<view class="desc">{{card.USER_DESC || '暂无简介'}}</view>
+				<view class="city" wx:if="{{card.USER_CITY}}">
+					<text class="icon-location"></text>
+					<text>{{card.USER_CITY}}</text>
+				</view>
+			</view>
+
+			<view class="section" wx:if="{{card.USER_MOBILE}}">
+				<view class="item">
+					<text class="label">联系方式</text>
+					<text class="value">{{card.USER_MOBILE}}</text>
+				</view>
+			</view>
+
+			<view class="section" wx:if="{{card.USER_RESOURCE}}">
+				<view class="title">可提供资源</view>
+				<view class="content">{{card.USER_RESOURCE}}</view>
+			</view>
+
+			<view class="section" wx:if="{{card.USER_NEEDS}}">
+				<view class="title">需求</view>
+				<view class="content">{{card.USER_NEEDS}}</view>
+			</view>
+		</view>
+	</view>
+</view>

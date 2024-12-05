@@ -1,0 +1,63 @@
+<view class="main">
+	<view class="form-box shadow">
+		<text class="form-title">
+			<text class="must">*</text>头像
+		</text>
+		<button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="bindChooseAvatar">
+			<view class="avatar-wrap">
+				<image wx:if="{{avatarUrl}}" class="avatar loading" src="{{avatarUrl}}" mode="aspectFill"></image>
+				<text wx:else class="icon-cameraadd"></text>
+			</view>
+			<view class="hint-desc">点击上传头像</view>
+		</button>
+
+		<text class="form-title">
+			<text class="must">*</text>昵称
+		</text>
+		<input type="nickname" class="btn-get-info" placeholder="点击获取昵称" model:value="{{nickName}}"></input>
+
+		<text class="form-title">
+			<text class="must">*</text>手机号码
+		</text>
+		<block wx:if="{{!phone}}">
+			<button class="btn-get-info" open-type="getPhoneNumber" bindgetphonenumber="bindGetPhoneNumber">点击获取手机号码</button>
+		</block>
+		<block wx:else>
+			<view class="info-text">{{phone}}</view>
+		</block>
+
+		<text class="form-title">
+			<text class="must">*</text>真实姓名
+		</text>
+		<input placeholder="填写您的真实姓名" model:value="{{formRealName}}" maxlength="30"></input>
+
+		<text class="form-title">
+			<text class="must">*</text>性别
+		</text>
+		<radio-group class="radio-group" bindchange="bindGenderChange">
+			<label class="radio-item" wx:for="{{genderOptions}}" wx:key="index">
+				<radio value="{{index}}" checked="{{formGender == index}}"/>{{item}}
+			</label>
+		</radio-group>
+
+		<text class="form-title">
+			<text class="must">*</text>城市
+		</text>
+		<input placeholder="填写您所在的城市" model:value="{{formCity}}" maxlength="50"></input>
+
+		<text class="form-title">
+			<text class="must">*</text>自我介绍
+		</text>
+		<textarea placeholder="请简单介绍一下自己" model:value="{{formDesc}}" maxlength="500" style="min-height:150rpx"></textarea>
+
+		<text class="form-title">可分享资源</text>
+		<textarea placeholder="您可以分享的资源" model:value="{{formResource}}" maxlength="500" style="min-height:100rpx"></textarea>
+
+		<text class="form-title">需求</text>
+		<textarea placeholder="您的需求" model:value="{{formNeeds}}" maxlength="500" style="min-height:100rpx"></textarea>
+	</view>
+
+	<view class="btn-submit-box">
+		<button class="btn-submit bg-blue" bindtap="bindSubmitForm">提交注册</button>
+	</view>
+</view> 

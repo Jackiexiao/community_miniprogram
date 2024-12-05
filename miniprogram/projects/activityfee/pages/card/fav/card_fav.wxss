@@ -1,0 +1,75 @@
+.main {
+	padding: 0 0 100rpx;
+}
+
+.card-list {
+	padding: 20rpx;
+}
+
+.card-item {
+	background-color: #fff;
+	border-radius: 10rpx;
+	padding: 30rpx;
+	margin-bottom: 20rpx;
+	display: flex;
+}
+
+.card-left {
+	margin-right: 30rpx;
+}
+
+.avatar {
+	width: 100rpx;
+	height: 100rpx;
+	border-radius: 50%;
+}
+
+.card-right {
+	flex: 1;
+}
+
+.card-head {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10rpx;
+}
+
+.name {
+	font-size: 32rpx;
+	font-weight: bold;
+	margin-right: 20rpx;
+}
+
+.role {
+	font-size: 24rpx;
+	color: #0820a8;
+	background-color: rgba(8, 32, 168, 0.1);
+	padding: 4rpx 16rpx;
+	border-radius: 20rpx;
+}
+
+.card-desc {
+	font-size: 26rpx;
+	margin-bottom: 16rpx;
+}
+
+.card-tags {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tag {
+	font-size: 24rpx;
+	color: #666;
+	background-color: #f6f6f6;
+	padding: 4rpx 16rpx;
+	border-radius: 20rpx;
+	margin-right: 16rpx;
+	margin-bottom: 10rpx;
+}
+
+.no-data, .load-more {
+	text-align: center;
+	padding: 30rpx;
+	font-size: 26rpx;
+}

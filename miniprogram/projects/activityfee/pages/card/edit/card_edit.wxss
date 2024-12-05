@@ -1,0 +1,183 @@
+.main {
+	padding: 0 0 200rpx;
+}
+
+.form-box {
+	padding: 30rpx;
+}
+
+.form-group {
+	background: #fff;
+	padding: 30rpx;
+	border-radius: 20rpx;
+	margin-bottom: 30rpx;
+}
+
+.title {
+	font-size: 30rpx;
+	font-weight: bold;
+	margin-bottom: 30rpx;
+}
+
+.hint {
+	font-size: 24rpx;
+	color: #999;
+	font-weight: normal;
+}
+
+.avatar-box {
+	display: flex;
+	align-items: center;
+}
+
+.avatar {
+	width: 120rpx;
+	height: 120rpx;
+	border-radius: 50%;
+	margin-right: 30rpx;
+}
+
+.btn-upload {
+	background: #f6f6f6;
+	color: #666;
+	font-size: 28rpx;
+	padding: 10rpx 30rpx;
+	border-radius: 10rpx;
+}
+
+.form-list {
+	background: #fff;
+}
+
+.form-item {
+	display: flex;
+	align-items: flex-start;
+	padding: 20rpx 0;
+	border-bottom: 2rpx solid #f6f6f6;
+}
+
+.form-item:last-child {
+	border-bottom: none;
+}
+
+.label {
+	width: 160rpx;
+	font-size: 28rpx;
+	color: #000;
+	padding-top: 8rpx;
+}
+
+.picker {
+	flex: 1;
+	font-size: 28rpx;
+	color: #333;
+}
+
+input {
+	flex: 1;
+	font-size: 28rpx;
+	color: #333;
+}
+
+textarea {
+	width: 100%;
+	font-size: 28rpx;
+	color: #333;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 20rpx;
+}
+
+.tag {
+	font-size: 26rpx;
+	color: #666;
+	background: #f6f6f6;
+	padding: 10rpx 30rpx;
+	border-radius: 30rpx;
+	margin: 0 20rpx 20rpx 0;
+}
+
+.tag-checked {
+	color: #0820a8;
+	background: rgba(8, 32, 168, 0.1);
+}
+
+.tag-input {
+	width: 100%;
+	height: 80rpx;
+	background: #f6f6f6;
+	border-radius: 10rpx;
+	padding: 0 20rpx;
+	font-size: 26rpx;
+	margin-top: 10rpx;
+}
+
+.project-list {
+	margin-bottom: 30rpx;
+}
+
+.project-item {
+	background: #f6f6f6;
+	padding: 20rpx;
+	border-radius: 10rpx;
+	margin-bottom: 20rpx;
+}
+
+.project-form {
+	margin-bottom: 20rpx;
+}
+
+.project-title {
+	font-size: 28rpx;
+	margin-bottom: 20rpx;
+}
+
+.project-desc {
+	width: 100%;
+	min-height: 100rpx;
+	font-size: 28rpx;
+	margin-bottom: 20rpx;
+}
+
+.project-tags {
+	font-size: 28rpx;
+}
+
+.btn-delete {
+	text-align: right;
+	font-size: 26rpx;
+	color: #e54d42;
+}
+
+.btn-add {
+	text-align: center;
+	font-size: 28rpx;
+	color: #0820a8;
+}
+
+.bottom-btn {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	padding: 20rpx 30rpx;
+	box-sizing: border-box;
+	box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
+}
+
+.btn-submit {
+	background: #0820a8;
+	color: #fff;
+	font-size: 32rpx;
+	height: 80rpx;
+	line-height: 80rpx;
+	border-radius: 40rpx;
+}
+
+.phc {
+	color: #ccc;
+}

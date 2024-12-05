@@ -1,0 +1,59 @@
+<view class="main">
+	<!-- 搜索栏 -->
+	<view class="search-bar">
+		<view class="search-box">
+			<icon size="14" type="search"></icon>
+			<input type="text" placeholder="搜索技能、角色或昵称" placeholder-class="phc" model:value="{{search}}" bindconfirm="bindSearch"></input>
+		</view>
+	</view>
+
+	<!-- 搜索结果 -->
+	<view class="result" wx:if="{{search}}">
+		<view class="result-bar" wx:if="{{list && list.length}}">
+			<text class="text-grey">搜索到{{list.length}}个结果</text>
+		</view>
+
+		<!-- 名片列表 -->
+		<view class="card-list">
+			<view class="card-item" wx:for="{{list}}" wx:key="key" bindtap="url" data-url="../detail/card_detail?id={{item._id}}">
+				<view class="card-left">
+					<image class="avatar" mode="aspectFill" src="{{item.USER_PIC}}"></image>
+				</view>
+				<view class="card-right">
+					<view class="card-head">
+						<view class="name">{{item.USER_NAME}}</view>
+						<view class="role">{{item.USER_ROLE}}</view>
+					</view>
+					<view class="card-desc text-grey">{{item.USER_DESC}}</view>
+					<view class="card-tags">
+						<text class="tag" wx:for="{{item.USER_TAGS}}" wx:key="key">{{item}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+
+		<!-- 无数据 -->
+		<view class="no-data" wx:if="{{list && list.length === 0}}">
+			<text class="text-grey">未找到相关名片~</text>
+		</view>
+	</view>
+
+	<!-- 搜索历史 -->
+	<view class="history" wx:if="{{!search && history.length}}">
+		<view class="history-title">
+			<text>搜索历史</text>
+			<text class="clear" bindtap="bindClearHistory">清除</text>
+		</view>
+		<view class="history-list">
+			<view class="history-item" wx:for="{{history}}" wx:key="key" bindtap="bindHistoryTap" data-value="{{item}}">{{item}}</view>
+		</view>
+	</view>
+
+	<!-- 热门标签 -->
+	<view class="hot-tags" wx:if="{{!search}}">
+		<view class="hot-title">热门标签</view>
+		<view class="tags">
+			<view class="tag" wx:for="{{tags}}" wx:key="key" bindtap="bindTagTap" data-tag="{{item}}">{{item}}</view>
+		</view>
+	</view>
+</view>

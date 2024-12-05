@@ -1,0 +1,160 @@
+page {
+    background: #f8f9fa;
+}
+
+/* 名片列表 */
+.card-list {
+    padding: 30rpx;
+}
+
+.card-item {
+    background: #fff;
+    border-radius: 20rpx;
+    padding: 30rpx;
+    margin-bottom: 30rpx;
+    box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+
+.avatar {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    margin-right: 20rpx;
+    background-color: #f5f5f5;
+}
+
+.info {
+    flex: 1;
+}
+
+.name {
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8rpx;
+}
+
+.time {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.card-body {
+    padding-left: 120rpx;
+}
+
+.desc {
+    font-size: 28rpx;
+    color: #666;
+    margin-bottom: 16rpx;
+    line-height: 1.6;
+}
+
+.city {
+    display: flex;
+    align-items: center;
+    font-size: 24rpx;
+    color: #999;
+}
+
+.icon-location {
+    margin-right: 8rpx;
+}
+
+/* 加载更多 */
+.load-more {
+    text-align: center;
+    padding: 30rpx 0;
+    color: #999;
+    font-size: 24rpx;
+}
+
+/* 无数据提示 */
+.no-data {
+    text-align: center;
+    padding: 100rpx 0;
+}
+
+.no-data text {
+    font-size: 28rpx;
+    color: #999;
+}
+
+/* 筛选栏 */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    padding: 20rpx 0;
+    margin-top: 110rpx;
+    margin-bottom: 20rpx;
+}
+
+.filter-item {
+    font-size: 28rpx;
+    color: #666;
+    padding: 10rpx 25rpx;
+    border-radius: 25rpx;
+    margin-right: 15rpx;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.filter-item.active {
+    color: #0066ff;
+    background: rgba(0, 102, 255, 0.1);
+    font-weight: 500;
+}
+
+/* 重写组件样式 */
+.cmpt-comm-list {
+    margin: 0;
+}
+
+.cmpt-comm-list .top_bar {
+    padding: 0 !important;
+}
+
+.cmpt-comm-list .bar {
+    padding: 0 !important;
+}
+
+.cmpt-comm-list .bar.search {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.cmpt-comm-list .search-form {
+    margin: 0;
+    padding: 20rpx 30rpx;
+    background: #fff;
+    border-bottom: 2rpx solid #f5f5f5;
+}
+
+.cmpt-comm-list .search-form.round {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 8rpx;
+    padding: 16rpx 24rpx;
+    margin: 0;
+}
+
+.cmpt-comm-list .search-form .icon-search {
+    margin-right: 12rpx;
+}
+
+.cmpt-comm-list .search-form input {
+    flex: 1;
+    font-size: 28rpx;
+    color: #333;
+}
+
+.cmpt-comm-list .flex-direction {
+    padding: 0 !important;
+}

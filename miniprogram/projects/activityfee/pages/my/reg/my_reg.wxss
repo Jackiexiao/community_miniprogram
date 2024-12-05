@@ -1,0 +1,148 @@
+.main {
+	padding: 30rpx;
+	padding-bottom: 100rpx;
+}
+
+.form-box {
+	background: #fff;
+	padding: 30rpx;
+	border-radius: 20rpx;
+	margin-bottom: 30rpx;
+}
+
+.form-title {
+	display: block;
+	font-size: 28rpx;
+	color: #000;
+	margin-bottom: 15rpx;
+	margin-top: 35rpx;
+}
+
+.form-title:first-child {
+	margin-top: 0;
+}
+
+.form-title .must {
+	color: #f00;
+	margin-right: 4rpx;
+}
+
+.avatar-btn {
+	padding: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: none;
+}
+
+.avatar-btn::after {
+	border: none;
+}
+
+.avatar-wrap {
+	width: 180rpx;
+	height: 180rpx;
+	background: #f8f8f8;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20rpx;
+}
+
+.avatar {
+	width: 180rpx;
+	height: 180rpx;
+	border-radius: 50%;
+}
+
+.icon-cameraadd {
+	font-size: 60rpx;
+	color: #999;
+}
+
+.hint-desc {
+	font-size: 26rpx;
+	color: #999;
+}
+
+input,
+picker,
+textarea {
+	background: #f8f8f8;
+	padding: 20rpx 30rpx;
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 28rpx;
+	border-radius: 10rpx;
+	min-height: 90rpx;
+}
+
+.picker {
+	line-height: 50rpx;
+	color: #333;
+}
+
+.btn-get-info {
+	background: #f8f8f8;
+	padding: 20rpx 30rpx;
+	width: 100%;
+	text-align: left;
+	border-radius: 10rpx;
+	font-size: 28rpx;
+	color: #999;
+	min-height: 90rpx;
+	display: flex;
+	align-items: center;
+}
+
+.btn-get-info::after {
+	border: none;
+}
+
+.info-text {
+	background: #f8f8f8;
+	padding: 20rpx 30rpx;
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: 10rpx;
+	font-size: 28rpx;
+	min-height: 90rpx;
+	display: flex;
+	align-items: center;
+}
+
+.btn-submit {
+	width: 100%;
+	color: #fff;
+	font-size: 32rpx;
+	border-radius: 10rpx;
+	height: 90rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	background: #0820a8;
+}
+
+.radio-group {
+	background: #f8f8f8;
+	padding: 20rpx 30rpx;
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: 10rpx;
+	display: flex;
+	align-items: center;
+	min-height: 90rpx;
+}
+
+.radio-item {
+	margin-right: 40rpx;
+	font-size: 28rpx;
+	color: #333;
+}
+
+.radio-item:last-child {
+	margin-right: 0;
+} 

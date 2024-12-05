@@ -1,0 +1,151 @@
+@import "../../../style/skin.wxss"; 
+
+page {
+	background: #f8f9fa;
+}
+
+.main {
+	min-height: 100vh;
+	padding: 30rpx;
+	background: #f8f9fa;
+}
+
+.form-box {
+	background: #fff;
+	border-radius: 20rpx;
+	padding: 30rpx;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+	margin: 0;
+	padding: 20rpx 30rpx;
+}
+
+.form-group .title {
+	font-size: 32rpx;
+	font-weight: 500;
+	color: #333;
+	padding-left: 20rpx;
+	border-left: 8rpx solid #0066ff;
+	margin-bottom: 20rpx;
+}
+
+.form-item {
+	min-height: 88rpx;
+	display: flex;
+	align-items: center;
+	margin-bottom: 20rpx;
+}
+
+.form-item:last-child {
+	margin-bottom: 0;
+}
+
+.label {
+	width: 160rpx;
+	font-size: 28rpx;
+	color: #666;
+}
+
+.input {
+	flex: 1;
+	height: 88rpx;
+	background: #f8f9fa;
+	border-radius: 12rpx;
+	padding: 0 24rpx;
+	font-size: 28rpx;
+	color: #333;
+}
+
+.picker {
+	flex: 1;
+	height: 88rpx;
+	background: #f8f9fa;
+	border-radius: 12rpx;
+	padding: 0 24rpx;
+	display: flex;
+	align-items: center;
+}
+
+.picker-text {
+	font-size: 28rpx;
+	color: #333;
+}
+
+.textarea {
+	width: 100%;
+	height: 200rpx;
+	background: #f8f9fa;
+	border-radius: 12rpx;
+	padding: 24rpx;
+	font-size: 28rpx;
+	color: #333;
+	box-sizing: border-box;
+}
+
+.form-title {
+    display: block;
+    font-size: 28rpx;
+    font-weight: bold;
+    margin: 30rpx 0 20rpx;
+    color: #333;
+}
+
+.must {
+    color: #f00;
+    margin-right: 10rpx;
+}
+
+input {
+    background: #f8f9fa;
+    height: 88rpx;
+    padding: 0 20rpx;
+    font-size: 28rpx;
+    color: #333;
+    border-radius: 10rpx;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+textarea {
+    background: #f8f9fa;
+    padding: 20rpx;
+    font-size: 28rpx;
+    color: #333;
+    border-radius: 10rpx;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.radio-group {
+    display: flex;
+    padding: 20rpx 0;
+}
+
+.radio-item {
+    margin-right: 40rpx;
+    font-size: 28rpx;
+}
+
+.hint-desc {
+    font-size: 24rpx;
+    color: #999;
+    margin-top: 10rpx;
+}
+
+.hint-desc.error {
+    color: #f00;
+}
+
+.btn-submit {
+    width: 100%;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    font-size: 32rpx;
+    background: #0066ff;
+    color: #fff;
+    border-radius: 44rpx;
+    margin-top: 40rpx;
+}

@@ -1,0 +1,30 @@
+<view class="main">
+	<!-- 名片列表 -->
+	<view class="card-list">
+		<view class="card-item" wx:for="{{list}}" wx:key="key" bindtap="url" data-url="../detail/card_detail?id={{item._id}}">
+			<view class="card-left">
+				<image class="avatar" mode="aspectFill" src="{{item.USER_PIC}}"></image>
+			</view>
+			<view class="card-right">
+				<view class="card-head">
+					<view class="name">{{item.USER_NAME}}</view>
+					<view class="role">{{item.USER_ROLE}}</view>
+				</view>
+				<view class="card-desc text-grey">{{item.USER_DESC}}</view>
+				<view class="card-tags">
+					<text class="tag" wx:for="{{item.USER_TAGS}}" wx:key="key">{{item}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<!-- 无数据 -->
+	<view wx:if="{{!list}}" class="no-data">
+		<text class="text-grey">暂无收藏的名片~</text>
+	</view>
+
+	<!-- 加载更多 -->
+	<view wx:if="{{list && !isLoad}}" class="load-more">
+		<text class="text-grey">加载中...</text>
+	</view>
+</view>
