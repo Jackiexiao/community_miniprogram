@@ -2,38 +2,32 @@
 	<cmpt-nav title="名片夹"></cmpt-nav>
 
 	<!-- 名片列表 -->
-	<view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
-	<block wx:else>
-		<cmpt-comm-list type="card-list" _params="{{_params}}" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" sortMenusDefaultIndex="0" route="card/list" topBottom="120" isTotalMenu="{{true}}" placeholder="搜索" bind:list="bindCommListCmpt">
-			<view class="card-list">
-				<view class="card-item" wx:for="{{dataList.list}}" wx:key="key" bindtap="url" data-url="../detail/card_detail?id={{item._id}}">
-					<view class="card-header">
-						<image class="avatar" mode="aspectFill" lazy-load="{{true}}" src="{{item.USER_PIC}}" />
-						<view class="info">
-							<view class="name">{{item.USER_NAME}}</view>
-							<view class="time">{{item.USER_ADD_TIME}}</view>
+	<view class="main">
+		<view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
+		<block wx:else>
+			<block wx:if="{{isLoad}}">
+				<cmpt-comm-list type="card-list" _params="{{_params}}" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" sortMenusDefaultIndex="0" route="card/list" topBottom="120" isTotalMenu="{{true}}" placeholder="搜索" bind:list="bindCommListCmpt">
+					<view class="card-list">
+						<view class="card-item" wx:for="{{dataList.list}}" wx:key="key" bindtap="url" data-url="../detail/card_detail?id={{item._id}}">
+							<image class="card-image loading" mode="aspectFill" lazy-load="{{true}}" src="{{item.USER_PIC}}" />
+							<view class="card-content">
+								<view class="card-name">{{item.USER_NAME}}</view>
+								<view class="card-desc">{{item.USER_DESC}}</view>
+							</view>
 						</view>
 					</view>
-					<view class="card-body">
-						<view class="desc">{{item.USER_DESC || '暂无简介'}}</view>
-						<view class="city" wx:if="{{item.USER_CITY}}">
-							<text class="icon-location"></text>
-							<text>{{item.USER_CITY}}</text>
-						</view>
-					</view>
-				</view>
-			</view>
+				</cmpt-comm-list>
+			</block>
 
 			<!--load begin-->
 			<import src="../../../../../tpls/public/list_load_tpl.wxml" />
 			<template is="listLoadTpl" data="{{skin:'load-project',dataList}}" />
 			<!--load end-->
-		</cmpt-comm-list>
-	</block>
+		</block>
 
-
-	<!-- 加载更多 -->
-	<view wx:if="{{list && !isLoad}}" class="load-more">
-		<text class="text-grey">加载中...</text>
+		<!-- 加载更多 -->
+		<view wx:if="{{list && !isLoad}}" class="load-more">
+			<text class="icon-loading load-project"></text>
+		</view>
 	</view>
 </view>

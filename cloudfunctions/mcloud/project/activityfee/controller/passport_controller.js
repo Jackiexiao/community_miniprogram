@@ -26,7 +26,7 @@ class PassportController extends BaseProjectController {
 			pic: 'must|string|name=头像',
 			gender: 'must|int|in:0,1,2|name=性别',
 			city: 'must|string|min:2|max:50|name=城市',
-			desc: 'must|string|min:10|max:500|name=自我介绍',
+			desc: 'must|string|min:10|max:500|name=自我介绍（不少于10个字）',
 			resource: 'string|max:500|name=可分享资源',
 			needs: 'string|max:500|name=需求',
 			forms: 'array|name=表单',

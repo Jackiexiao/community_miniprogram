@@ -180,7 +180,6 @@
 	box-sizing: border-box;
 	position: relative;
 	padding-top: 110px; /* 导航栏 + 搜索栏的高度 */
-	z-index: 999;
 }
 
 .comm-list-search {
@@ -195,4 +194,19 @@
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
+}
+
+.search-form {
+	padding: 20rpx 30rpx;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	background-color: #fff;
+	border-radius: 10rpx;
+}
+
+.search-form input {
+	flex: 1;
+	margin-left: 20rpx;
+	font-size: 28rpx;
 }
