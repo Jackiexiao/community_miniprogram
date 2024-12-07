@@ -1,4 +1,4 @@
-@import "../../../style/public/project.wxss";
+@import "/style/public/project.wxss";
 
 .site-footer {
 	width: 100%;

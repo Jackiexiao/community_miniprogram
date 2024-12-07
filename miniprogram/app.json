@@ -67,7 +67,6 @@
 		"selectedColor": "#000000",
 		"backgroundColor": "#FFFFFF",
 		"borderStyle": "white",
-		"height": "120rpx",
 		"list": [
 			{
 				"pagePath": "projects/activityfee/pages/activity/index/activity_index",
@@ -95,6 +94,9 @@
 		"cmpt-comm-list": "/cmpts/public/list/comm_list_cmpt",
 		"cmpt-picker": "/cmpts/public/picker/picker_cmpt",
 		"cmpt-modal": "/cmpts/public/modal/modal_cmpt"
+	},
+	"resolveAlias": {
+		"@/*": "/*"
 	},
 	"sitemapLocation": "sitemap.json"
 }

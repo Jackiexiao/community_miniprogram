@@ -1,1 +1,7 @@
-@import '../../../../../../style/public/admin.wxss';
+@import "/style/public/admin.wxss";
+@import "/projects/activityfee/style/skin.wxss";
+@import "/style/apple.wxss";
+
+page {
+    background-color: var(--apple-gray-1) !important;
+}

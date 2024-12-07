@@ -1,1 +1,246 @@
-@import '../../../../../../style/public/admin.wxss'; 
+@import "/style/public/admin.wxss";
+@import "/projects/activityfee/style/skin.wxss";
+@import "/style/apple.wxss";
+
+page {
+    background-color: var(--apple-gray-1) !important;
+}
+
+.main {
+    padding: 24rpx;
+}
+
+.admin-form {
+    background: #ffffff;
+    border-radius: 16rpx;
+    padding: 24rpx;
+    margin-bottom: 24rpx;
+    box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+    margin-bottom: 32rpx;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group.line {
+    padding-bottom: 32rpx;
+    border-bottom: 1rpx solid var(--apple-gray-2);
+}
+
+.form-group.line:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.form-label {
+    font-size: 28rpx;
+    font-weight: 500;
+    color: var(--apple-gray-5);
+    margin-bottom: 16rpx;
+    display: flex;
+    align-items: center;
+}
+
+.form-label .required {
+    color: var(--apple-red);
+    margin-left: 8rpx;
+}
+
+.form-label .hint {
+    font-size: 24rpx;
+    font-weight: normal;
+    color: var(--apple-gray-4);
+    margin-left: 16rpx;
+}
+
+.input-box {
+    background: var(--apple-gray-1);
+    border-radius: 12rpx;
+    padding: 24rpx;
+    transition: all 0.2s ease;
+}
+
+.input-box.focus {
+    background: #ffffff;
+    box-shadow: 0 0 0 2rpx var(--apple-blue);
+}
+
+.input-box input {
+    width: 100%;
+    font-size: 28rpx;
+    color: var(--apple-gray-5);
+}
+
+.input-box textarea {
+    width: 100%;
+    height: 240rpx;
+    font-size: 28rpx;
+    color: var(--apple-gray-5);
+    line-height: 1.6;
+}
+
+.input-placeholder {
+    color: var(--apple-gray-4);
+}
+
+.switch-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.switch-label {
+    font-size: 28rpx;
+    color: var(--apple-gray-5);
+}
+
+.image-upload {
+    margin-top: 16rpx;
+}
+
+.image-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -8rpx;
+}
+
+.image-item {
+    width: 200rpx;
+    height: 200rpx;
+    margin: 8rpx;
+    position: relative;
+    border-radius: 12rpx;
+    overflow: hidden;
+}
+
+.image-item image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-item .delete {
+    position: absolute;
+    top: 8rpx;
+    right: 8rpx;
+    width: 48rpx;
+    height: 48rpx;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-item .delete .icon {
+    font-size: 32rpx;
+    color: #ffffff;
+}
+
+.image-upload-btn {
+    width: 200rpx;
+    height: 200rpx;
+    margin: 8rpx;
+    background: var(--apple-gray-1);
+    border-radius: 12rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.image-upload-btn:active {
+    background: var(--apple-gray-2);
+}
+
+.image-upload-btn .icon {
+    font-size: 48rpx;
+    color: var(--apple-gray-4);
+    margin-bottom: 8rpx;
+}
+
+.image-upload-btn .text {
+    font-size: 24rpx;
+    color: var(--apple-gray-4);
+}
+
+.time-picker {
+    display: flex;
+    align-items: center;
+    margin: 0 -8rpx;
+}
+
+.time-picker .picker-item {
+    flex: 1;
+    margin: 0 8rpx;
+}
+
+.picker-box {
+    background: var(--apple-gray-1);
+    border-radius: 12rpx;
+    padding: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.picker-text {
+    font-size: 28rpx;
+    color: var(--apple-gray-5);
+}
+
+.picker-arrow {
+    font-size: 32rpx;
+    color: var(--apple-gray-4);
+}
+
+.form-tips {
+    font-size: 24rpx;
+    color: var(--apple-gray-4);
+    margin-top: 8rpx;
+    line-height: 1.4;
+}
+
+.error-tips {
+    font-size: 24rpx;
+    color: var(--apple-red);
+    margin-top: 8rpx;
+}
+
+.form-footer {
+    margin-top: 48rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.form-btn {
+    min-width: 200rpx;
+    height: 88rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32rpx;
+    font-weight: 500;
+    border-radius: 44rpx;
+    margin: 0 16rpx;
+    transition: all 0.2s ease;
+}
+
+.form-btn:active {
+    opacity: 0.8;
+}
+
+.form-btn.primary {
+    background: var(--apple-blue);
+    color: #ffffff;
+}
+
+.form-btn.secondary {
+    background: var(--apple-gray-2);
+    color: var(--apple-gray-5);
+}

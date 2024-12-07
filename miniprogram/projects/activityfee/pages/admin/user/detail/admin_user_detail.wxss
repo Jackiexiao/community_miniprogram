@@ -1,16 +1,261 @@
-@import '../../../../../../style/public/admin.wxss';
+@import "/style/public/admin.wxss";
+@import "/projects/activityfee/style/skin.wxss";
+@import "/style/apple.wxss";
+
+page {
+    background-color: var(--apple-gray-1) !important;
+}
 
 .main-admin {
-	padding: 30rpx 0rpx;
+    padding: 24rpx;
+}
+
+.user-profile {
+    background: #ffffff;
+    border-radius: 16rpx;
+    margin-bottom: 24rpx;
+    overflow: hidden;
+    box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.user-header {
+    padding: 48rpx 24rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1rpx solid var(--apple-gray-2);
+    position: relative;
+}
+
+.user-header .avatar {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 80rpx;
+    margin-bottom: 24rpx;
+}
+
+.user-header .user-name {
+    font-size: 36rpx;
+    font-weight: 600;
+    color: var(--apple-gray-5);
+    margin-bottom: 8rpx;
+}
+
+.user-header .user-id {
+    font-size: 28rpx;
+    color: var(--apple-gray-4);
+}
+
+.user-header .status {
+    position: absolute;
+    top: 24rpx;
+    right: 24rpx;
+    font-size: 24rpx;
+    padding: 6rpx 16rpx;
+    border-radius: 24rpx;
+}
+
+.user-header .status.active {
+    background: rgba(52, 199, 89, 0.1);
+    color: var(--apple-green);
+}
+
+.user-header .status.inactive {
+    background: rgba(142, 142, 147, 0.1);
+    color: var(--apple-gray-4);
+}
+
+.user-info {
+    padding: 24rpx;
+}
+
+.info-group {
+    margin-bottom: 32rpx;
+}
+
+.info-group:last-child {
+    margin-bottom: 0;
+}
+
+.info-group .title {
+    font-size: 32rpx;
+    font-weight: 600;
+    color: var(--apple-gray-5);
+    margin-bottom: 24rpx;
+    padding-bottom: 16rpx;
+    border-bottom: 1rpx solid var(--apple-gray-2);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    font-size: 28rpx;
+    color: var(--apple-gray-4);
+    width: 160rpx;
+}
+
+.info-value {
+    flex: 1;
+    font-size: 28rpx;
+    color: var(--apple-gray-5);
 }
 
 .info-item.pic {
-	display: flex;
+    display: flex;
 }
 
 .info-item.pic image{
-	width: 180rpx;
-	height: 180rpx;
-	margin-left: 20rpx;
-	border-radius: 2rpx;
+    width: 180rpx;
+    height: 180rpx;
+    margin-left: 20rpx;
+    border-radius: 2rpx;
+}
+
+.action-group {
+    background: #ffffff;
+    border-radius: 16rpx;
+    padding: 24rpx;
+    box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.action-group .title {
+    font-size: 32rpx;
+    font-weight: 600;
+    color: var(--apple-gray-5);
+    margin-bottom: 24rpx;
+}
+
+.action-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -8rpx;
+}
+
+.action-btn {
+    flex: 1;
+    min-width: 200rpx;
+    margin: 8rpx;
+    height: 88rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28rpx;
+    font-weight: 500;
+    border-radius: 12rpx;
+    transition: all 0.2s ease;
+}
+
+.action-btn:active {
+    opacity: 0.8;
+}
+
+.action-btn.primary {
+    background: var(--apple-blue);
+    color: #ffffff;
+}
+
+.action-btn.secondary {
+    background: var(--apple-gray-2);
+    color: var(--apple-gray-5);
+}
+
+.action-btn.danger {
+    background: var(--apple-red);
+    color: #ffffff;
+}
+
+.activity-list {
+    margin-top: 24rpx;
+}
+
+.activity-card {
+    background: #ffffff;
+    border-radius: 16rpx;
+    margin-bottom: 24rpx;
+    overflow: hidden;
+    box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.activity-card .header {
+    padding: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1rpx solid var(--apple-gray-2);
+}
+
+.activity-card .title {
+    font-size: 32rpx;
+    font-weight: 600;
+    color: var(--apple-gray-5);
+}
+
+.activity-card .time {
+    font-size: 24rpx;
+    color: var(--apple-gray-4);
+}
+
+.activity-card .content {
+    padding: 24rpx;
+}
+
+.activity-card .detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+}
+
+.activity-card .detail-item:last-child {
+    margin-bottom: 0;
+}
+
+.activity-card .detail-label {
+    font-size: 28rpx;
+    color: var(--apple-gray-4);
+    width: 160rpx;
+}
+
+.activity-card .detail-value {
+    flex: 1;
+    font-size: 28rpx;
+    color: var(--apple-gray-5);
+}
+
+.activity-card .footer {
+    padding: 24rpx;
+    border-top: 1rpx solid var(--apple-gray-2);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.activity-card .btn {
+    padding: 12rpx 24rpx;
+    font-size: 28rpx;
+    border-radius: 8rpx;
+    margin-left: 16rpx;
+    transition: all 0.2s ease;
+}
+
+.activity-card .btn:active {
+    opacity: 0.8;
+}
+
+.activity-card .btn.primary {
+    background: var(--apple-blue);
+    color: #ffffff;
+}
+
+.activity-card .btn.secondary {
+    background: var(--apple-gray-2);
+    color: var(--apple-gray-5);
 }

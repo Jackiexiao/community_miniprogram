@@ -1,4 +1,4 @@
-@import '../../../../../../style/public/admin.wxss';
+@import '/style/public/admin.wxss';
  
 .main-admin {
 	width: 100%;

@@ -1,2 +1,2 @@
-@import '../../../../../../style/public/admin.wxss';
+@import '/style/public/admin.wxss';
  

@@ -1,5 +1,5 @@
-@import "../../../../../style/public/article_list.wxss";
-@import "../../../style/skin.wxss"; 
+@import "/style/public/article_list.wxss";
+@import "/projects/activityfee/style/skin.wxss"; 
 .main {
 	padding: 0; 
 	display: flex;

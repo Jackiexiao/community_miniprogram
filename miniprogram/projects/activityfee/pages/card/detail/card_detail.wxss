@@ -1,5 +1,9 @@
+@import "/style/public/project.wxss";
+@import "/projects/activityfee/style/skin.wxss";
+@import "/style/apple.wxss";
+
 page {
-    background: #f8f9fa;
+    background-color: var(--apple-gray-1) !important;
 }
 
 .main {

@@ -1,8 +1,204 @@
-@import '../../../../../../style/public/admin.wxss';
-@import '../../../../../../style/project/admin_list_style.wxss';
+@import "/style/public/admin.wxss";
+@import "/projects/activityfee/style/skin.wxss";
+@import "/style/apple.wxss";
 
 page {
-	background-color: #f8f8f8;
+    background-color: var(--apple-gray-1) !important;
 }
 
- 
+.main {
+    padding: 24rpx;
+}
+
+.admin-header {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(10px);
+    padding: 24rpx;
+    margin: -24rpx -24rpx 24rpx;
+    border-bottom: 1rpx solid var(--apple-gray-2);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.admin-header .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--apple-gray-1);
+    border-radius: 12rpx;
+    padding: 16rpx 24rpx;
+    margin-bottom: 16rpx;
+}
+
+.admin-header .search-bar input {
+    flex: 1;
+    font-size: 28rpx;
+    color: var(--apple-gray-5);
+}
+
+.admin-header .filter-bar {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.admin-header .filter-item {
+    padding: 12rpx 24rpx;
+    font-size: 28rpx;
+    color: var(--apple-gray-4);
+    background: var(--apple-gray-1);
+    border-radius: 24rpx;
+    margin-right: 16rpx;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.admin-header .filter-item.active {
+    background: var(--apple-blue);
+    color: #ffffff;
+}
+
+.admin-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-card {
+    background: #ffffff;
+    border-radius: 16rpx;
+    margin-bottom: 24rpx;
+    overflow: hidden;
+    box-shadow: 0 8rpx 20rpx rgba(0, 0, 0, 0.08);
+}
+
+.admin-card .header {
+    padding: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1rpx solid var(--apple-gray-2);
+}
+
+.admin-card .title {
+    font-size: 32rpx;
+    font-weight: 600;
+    color: var(--apple-gray-5);
+}
+
+.admin-card .status {
+    font-size: 24rpx;
+    padding: 6rpx 16rpx;
+    border-radius: 24rpx;
+}
+
+.admin-card .status.green {
+    background: rgba(52, 199, 89, 0.1);
+    color: var(--apple-green);
+}
+
+.admin-card .status.red {
+    background: rgba(255, 59, 48, 0.1);
+    color: var(--apple-red);
+}
+
+.admin-card .content {
+    padding: 24rpx;
+}
+
+.admin-card .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16rpx;
+}
+
+.admin-card .info-item:last-child {
+    margin-bottom: 0;
+}
+
+.admin-card .info-label {
+    font-size: 28rpx;
+    color: var(--apple-gray-4);
+    width: 160rpx;
+}
+
+.admin-card .info-value {
+    flex: 1;
+    font-size: 28rpx;
+    color: var(--apple-gray-5);
+}
+
+.admin-card .footer {
+    padding: 24rpx;
+    border-top: 1rpx solid var(--apple-gray-2);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.admin-card .btn {
+    padding: 12rpx 24rpx;
+    font-size: 28rpx;
+    border-radius: 8rpx;
+    margin-left: 16rpx;
+    transition: all 0.2s ease;
+}
+
+.admin-card .btn:active {
+    opacity: 0.8;
+}
+
+.admin-card .btn.primary {
+    background: var(--apple-blue);
+    color: #ffffff;
+}
+
+.admin-card .btn.secondary {
+    background: var(--apple-gray-2);
+    color: var(--apple-gray-5);
+}
+
+.admin-card .btn.danger {
+    background: var(--apple-red);
+    color: #ffffff;
+}
+
+.add-btn {
+    position: fixed;
+    right: 40rpx;
+    bottom: 40rpx;
+    width: 100rpx;
+    height: 100rpx;
+    background: var(--apple-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8rpx 20rpx rgba(0, 102, 204, 0.2);
+    transition: all 0.2s ease;
+}
+
+.add-btn:active {
+    transform: scale(0.96);
+}
+
+.add-btn .icon {
+    font-size: 48rpx;
+    color: #ffffff;
+}
+
+.load-more {
+    width: 100%;
+    padding: 24rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: var(--apple-gray-4);
+}
+
+.no-more {
+    width: 100%;
+    padding: 24rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: var(--apple-gray-4);
+}
