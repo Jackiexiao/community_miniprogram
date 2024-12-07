@@ -1,61 +1,65 @@
-<view >
-    <!-- 加载中 -->
-    <view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
+<view class="container">
+    <cmpt-nav title="修改个人资料"></cmpt-nav>
 
-    <!-- 加载失败 -->
-    <view wx:elif="{{isLoad === null}}" class="margin-top load notexist text-l load-project">
-        <text class="text-grey">用户资料不存在或已被删除</text>
-    </view>
+    <view>
+        <!-- 加载中 -->
+        <view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
 
-    <!-- 编辑表单 -->
-    <view wx:else>
-        <form bindsubmit="bindFormSubmit">
-            <view class="form-box shadow">
-                <text class="form-title">
-                    <text class="must">*</text>昵称
-                </text>
-                <input type="nickname" placeholder="填写您的昵称" model:value="{{formData.name}}" maxlength="30" bindinput="onInput" data-field="name"></input>
+        <!-- 加载失败 -->
+        <view wx:elif="{{isLoad === null}}" class="margin-top load notexist text-l load-project">
+            <text class="text-grey">用户资料不存在或已被删除</text>
+        </view>
 
-                <text class="form-title">
-                    <text class="must">*</text>真实姓名
-                </text>
-                <input placeholder="填写您的真实姓名" model:value="{{formData.realName}}" maxlength="30" bindinput="onInput" data-field="realName"></input>
+        <!-- 编辑表单 -->
+        <view wx:else>
+            <form bindsubmit="bindFormSubmit">
+                <view class="form-box shadow">
+                    <text class="form-title">
+                        <text class="must">*</text>昵称
+                    </text>
+                    <input type="nickname" placeholder="填写您的昵称" model:value="{{formData.name}}" maxlength="30" bindinput="onInput" data-field="name"></input>
 
-                <text class="form-title">
-                    <text class="must">*</text>性别
-                </text>
-                <radio-group class="radio-group" bindchange="bindGenderChange">
-                    <label class="radio-item">
-                        <radio value="1" checked="{{formData.gender === 1}}"/>男
-                    </label>
-                    <label class="radio-item">
-                        <radio value="2" checked="{{formData.gender === 2}}"/>女
-                    </label>
-                </radio-group>
+                    <text class="form-title">
+                        <text class="must">*</text>真实姓名
+                    </text>
+                    <input placeholder="填写您的真实姓名" model:value="{{formData.realName}}" maxlength="30" bindinput="onInput" data-field="realName"></input>
 
-                <text class="form-title">
-                    <text class="must">*</text>手机号码
-                </text>
-                <input type="number" placeholder="填写您的手机号码" model:value="{{formData.mobile}}" maxlength="11" bindinput="onInput" data-field="mobile"></input>
+                    <text class="form-title">
+                        <text class="must">*</text>性别
+                    </text>
+                    <radio-group class="radio-group" bindchange="bindGenderChange">
+                        <label class="radio-item">
+                            <radio value="1" checked="{{formData.gender === 1}}"/>男
+                        </label>
+                        <label class="radio-item">
+                            <radio value="2" checked="{{formData.gender === 2}}"/>女
+                        </label>
+                    </radio-group>
 
-                <text class="form-title">
-                    <text class="must">*</text>城市
-                </text>
-                <input placeholder="填写您所在的城市" model:value="{{formData.city}}" maxlength="50" bindinput="onInput" data-field="city"></input>
+                    <text class="form-title">
+                        <text class="must">*</text>手机号码
+                    </text>
+                    <input type="number" placeholder="填写您的手机号码" model:value="{{formData.mobile}}" maxlength="11" bindinput="onInput" data-field="mobile"></input>
 
-                <text class="form-title">
-                    <text class="must">*</text>自我介绍
-                </text>
-                <textarea placeholder="请简单介绍一下自己" model:value="{{formData.desc}}" maxlength="500" style="min-height:150rpx" bindinput="onInput" data-field="desc"></textarea>
+                    <text class="form-title">
+                        <text class="must">*</text>城市
+                    </text>
+                    <input placeholder="填写您所在的城市" model:value="{{formData.city}}" maxlength="50" bindinput="onInput" data-field="city"></input>
 
-                <text class="form-title">可分享资源</text>
-                <textarea placeholder="您可以分享的资源" model:value="{{formData.resource}}" maxlength="500" style="min-height:100rpx" bindinput="onInput" data-field="resource"></textarea>
+                    <text class="form-title">
+                        <text class="must">*</text>自我介绍
+                    </text>
+                    <textarea placeholder="请简单介绍一下自己" model:value="{{formData.desc}}" maxlength="500" style="min-height:150rpx" bindinput="onInput" data-field="desc"></textarea>
 
-                <text class="form-title">需求</text>
-                <textarea placeholder="您的需求" model:value="{{formData.needs}}" maxlength="500" style="min-height:100rpx" bindinput="onInput" data-field="needs"></textarea>
-            </view>
+                    <text class="form-title">可分享资源</text>
+                    <textarea placeholder="您可以分享的资源" model:value="{{formData.resource}}" maxlength="500" style="min-height:100rpx" bindinput="onInput" data-field="resource"></textarea>
 
-            <button class="btn-submit margin-top" form-type="submit">提交</button>
-        </form>
+                    <text class="form-title">需求</text>
+                    <textarea placeholder="您的需求" model:value="{{formData.needs}}" maxlength="500" style="min-height:100rpx" bindinput="onInput" data-field="needs"></textarea>
+                </view>
+
+                <button class="btn-submit margin-top" form-type="submit">提交</button>
+            </form>
+        </view>
     </view>
 </view>
