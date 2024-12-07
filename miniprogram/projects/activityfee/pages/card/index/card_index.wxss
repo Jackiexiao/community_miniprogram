@@ -8,6 +8,7 @@ page {
 
 .main {
     padding: 0;
+    padding-top: 100rpx;  /* 为导航栏留出空间 */
     background-color: #F7F7F7;
 }
 

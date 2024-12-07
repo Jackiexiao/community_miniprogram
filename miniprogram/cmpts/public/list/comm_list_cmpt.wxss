@@ -64,7 +64,7 @@
 	flex-wrap: wrap;
 	align-items: center;
 	position: fixed;
-	top: calc(env(safe-area-inset-top) + 44px); /* 状态栏 + 导航栏高度 */
+	top: calc(env(safe-area-inset-top) + 90px); /* 增加顶部空间，为导航栏留出位置 */
 	left: 0;
 	z-index: 98;
 	background-color: #F7F7F7;
@@ -84,7 +84,7 @@
 .bar.fixed {
 	position: fixed;
 	z-index: 98;
-	top: calc(env(safe-area-inset-top) + 44px); /* 状态栏 + 导航栏高度 */
+	top: calc(env(safe-area-inset-top) + 90px); /* 同样增加顶部空间 */
 	left: 0;
 	right: 0;
 }
