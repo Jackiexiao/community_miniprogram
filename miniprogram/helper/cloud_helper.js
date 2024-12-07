@@ -238,8 +238,6 @@ class CloudHelper {
 			oldTotal = that.data[listName].total;
 		params.oldTotal = oldTotal;
 		await CloudHelper.callCloud(route, params, options).then(function (res) {
-			console.log('cloud begin');
-
 			let dataList = res.data;
 			let tList = that.data[listName].list;
 
@@ -259,12 +257,10 @@ class CloudHelper {
 
 			that.setData(listData);
 
-			console.log('cloud END');
 		}).catch(err => {
 			console.log(err)
 		});
 
-		console.log('dataList END');
 
 	}
 

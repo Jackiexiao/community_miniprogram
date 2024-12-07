@@ -14,6 +14,13 @@ Page({
 		});
 	},
 
+	onShow: function () {
+		// 更新 tabBar 选中状态
+		if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+			this.getTabBar().init();
+		}
+	},
+
 	onPullDownRefresh: function () {
 		this.setData({
 			_params: null

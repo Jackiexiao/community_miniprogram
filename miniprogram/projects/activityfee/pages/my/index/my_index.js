@@ -23,6 +23,11 @@ Page({
 	onShow: async function () {  
 		PassportBiz.loginSilenceMust(this); 
 		this._loadUser();
+
+		// 更新 tabBar 选中状态
+		if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+			this.getTabBar().init();
+		}
 	},
 	onHide: function () {
 
