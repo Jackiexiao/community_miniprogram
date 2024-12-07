@@ -6,12 +6,12 @@ page {
     background-color: var(--apple-gray-1) !important;
 }
 
-.main {
-    min-height: 100vh;
+.card-detail {
     padding: 30rpx;
 }
 
-.card-detail {
+.main {
+    min-height: 100vh;
     padding: 30rpx;
 }
 

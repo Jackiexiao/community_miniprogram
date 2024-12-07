@@ -1,6 +1,10 @@
-<view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l text-grey"></view>
-<view wx:if="{{isLoad===false}}" class="margin-top load loading text-l text-grey"></view>
+<view class="container">
+    <cmpt-nav title="编辑活动" class="admin"></cmpt-nav>
 
-<view class="main-admin" wx:if="{{isAdmin&&isLoad}}">
-	<include src="../activity_form_tpl.wxml" /> 
+    <view wx:if="{{isLoad===null}}" class="margin-top load notexist text-l text-grey"></view>
+    <view wx:if="{{isLoad===false}}" class="margin-top load loading text-l text-grey"></view>
+
+    <view class="main-admin" wx:if="{{isAdmin&&isLoad}}">
+        <include src="../activity_form_tpl.wxml" /> 
+    </view>
 </view>

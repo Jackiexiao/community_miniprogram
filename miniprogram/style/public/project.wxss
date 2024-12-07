@@ -1,5 +1,13 @@
- /* 主框架 */
- .main {
+ /* 容器 */
+.container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 主框架 */
+.main {
 	width: 100%;
 	box-sizing: border-box;
 	padding: 20rpx 20rpx;

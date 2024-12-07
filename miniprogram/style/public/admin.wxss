@@ -3,6 +3,13 @@ page {
 	--adminRedColor: #FF6666;
 }
 
+.container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .main-admin {
 	width: 100%;
 	padding: 30rpx 20rpx;

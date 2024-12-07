@@ -4,13 +4,6 @@ page {
 	background: #f8f9fa;
 }
 
-.container {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
 .main {
 	min-height: 100vh;
 	padding: 30rpx;

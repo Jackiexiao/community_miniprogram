@@ -1,4 +1,8 @@
-<view wx:if="{{!isLoad}}" class="margin-top load loading text-l text-grey"></view>
-<view class="main-admin" wx:if="{{isAdmin&&isLoad}}">
-	<include src="../activity_form_tpl.wxml" /> 
+<view class="container">
+    <cmpt-nav title="创建活动" class="admin"></cmpt-nav>
+
+    <view wx:if="{{!isLoad}}" class="margin-top load loading text-l text-grey"></view>
+    <view class="main-admin" wx:if="{{isAdmin&&isLoad}}">
+        <include src="../activity_form_tpl.wxml" /> 
+    </view>
 </view>

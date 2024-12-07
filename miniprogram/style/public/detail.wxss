@@ -1,3 +1,10 @@
+.container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 /*** 详情盒子 ***/
 .article-box {
 	padding: 0;
