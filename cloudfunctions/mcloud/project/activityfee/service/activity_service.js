@@ -102,6 +102,8 @@ class ActivityService extends BaseProjectService {
 		oldTotal
 	}) {
 
+		console.log('[getActivityList] Begin >>>>>', { cateId, search, sortType, sortVal, orderBy, page, size });
+
 		orderBy = orderBy || {
 			'ACTIVITY_ORDER': 'asc',
 			'ACTIVITY_ADD_TIME': 'desc'
@@ -112,10 +114,12 @@ class ActivityService extends BaseProjectService {
 		where.and = {
 			_pid: this.getProjectId() //复杂的查询在此处标注PID
 		};
+
+		console.log('[getActivityList] where=', where);
+
 		if (cateId && cateId !== '0') where.and.ACTIVITY_CATE_ID = cateId;
 
 		where.and.ACTIVITY_STATUS = ActivityModel.STATUS.COMM; // 状态  
-
 
 		if (util.isDefined(search) && search) {
 			where.or = [{
@@ -152,7 +156,14 @@ class ActivityService extends BaseProjectService {
 			}
 		}
 
-		return await ActivityModel.getList(where, fields, orderBy, page, size, isTotal, oldTotal);
+		console.log('[getActivityList] Final where=', where);
+		console.log('[getActivityList] Final orderBy=', orderBy);
+		console.log('[getActivityList] Final fields=', fields);
+
+		let result = await ActivityModel.getList(where, fields, orderBy, page, size, isTotal, oldTotal);
+		console.log('[getActivityList] result=', result);
+
+		return result;
 	}
 	async getActivityJoinList(activityId, {
 		search, // 搜索条件
@@ -491,6 +502,9 @@ class ActivityService extends BaseProjectService {
 
 		if (activity.ACTIVITY_CANCEL_SET == 2 && activity.ACTIVITY_STOP < this._timestamp)
 			this.AppError('该活动已经截止报名，不能取消');
+
+		if (activity.ACTIVITY_CANCEL_SET != 0 && activity.ACTIVITY_CANCEL_SET != 1 && activity.ACTIVITY_CANCEL_SET != 2)
+			this.AppError('数据填写错误3 ACTIVITY_CANCEL_SET');
 
 		if (activityJoin.ACTIVITY_JOIN_PAY_STATUS == 99) {
 			let data = {

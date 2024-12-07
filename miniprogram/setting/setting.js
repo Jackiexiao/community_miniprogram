@@ -1,5 +1,5 @@
 ﻿module.exports = {
-	CLOUD_ID: 'temp-23423423424342', //云服务id ,本地测试环境 
+	CLOUD_ID: 'hackweek-8gauui0hb495673b', //云服务id ,本地测试环境 
 	VER: 'build 2023.10.01',
 	COMPANY: '联系作者',
 	IS_SUB: false, //分包模式 

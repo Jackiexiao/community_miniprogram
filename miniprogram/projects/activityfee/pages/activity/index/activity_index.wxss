@@ -2,11 +2,12 @@
 
 .main {
 	padding: 0rpx !important;
+	background-color: #F5F5F7;
 }
 
 .list {
 	width: 100%;
-	padding: 0rpx 30rpx 20rpx;
+	padding: 20rpx 24rpx;
 	display: flex;
 	flex-direction: column;
 }
@@ -15,20 +16,25 @@
 	width: 100%;
 	display: flex;
 	background-color: #fff;
-	padding: 25rpx 25rpx;
+	padding: 24rpx;
 	overflow: hidden;
 	position: relative;
-	border-radius: 20rpx;
-	margin-bottom: 30rpx;
+	border-radius: 16rpx;
+	margin-bottom: 24rpx;
+	box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+	transition: all 0.2s ease-in-out;
+}
+
+.list .item:active {
+	transform: scale(0.98);
+	transition: all 0.2s ease-in-out;
 }
 
 .list .item .left {
-	width: 270rpx;
+	width: 240rpx;
 	height: 180rpx;
-	border-radius: 14rpx;
-	margin-right: 15rpx;
-	border-top-left-radius: 30rpx!important;
-	border-bottom-right-radius: 30rpx!important; 
+	border-radius: 12rpx;
+	margin-right: 20rpx;
 }
 
 .list .item .right {
@@ -46,18 +52,19 @@
 
 .list .item .right .top .title {
 	width: 100%;
-	font-size: 28rpx;
-	font-weight: bold;
-	color: #333;
-	margin-bottom: 20rpx;
-	margin-top: 14rpx;
+	font-size: 32rpx;
+	font-weight: 500;
+	color: #1D1D1F;
+	margin-bottom: 16rpx;
+	margin-top: 8rpx;
+	line-height: 1.4;
 }
 
 .list .item .right .top .desc {
 	width: 100%;
-	font-size: 24rpx;
-	color: #999;
-	margin-bottom: 10rpx;
+	font-size: 26rpx;
+	color: #86868B;
+	margin-bottom: 16rpx;
 }
 
 .list .item .right .line {
@@ -65,20 +72,21 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	font-size: 24rpx;
+	font-size: 26rpx;
+	margin-top: 8rpx;
 }
 
 .list .item .right .line .join {
-	color: #fff;
-	font-size: 24rpx;
-	padding: 6rpx 10rpx;
-	background-color: #ccc;
-	border-radius: 10rpx; 
+	color: #86868B;
+	font-size: 26rpx;
+	padding: 8rpx 16rpx;
+	background-color: #F5F5F7;
+	border-radius: 24rpx;
 }
 
 .list .item .right .line .join.comm {
-	background-color: var(--projectColor);
-	border-left: 8rpx solid var(--projectCompareColor); 
+	color: #fff;
+	background-color: #0066CC;
 }
 
 .list .item .right .line .users {
@@ -89,35 +97,27 @@
 
 .list .item .right .line .users .pic-group {
 	display: flex;
-	padding: 0 10rpx 0 0rpx;
+	padding: 0 12rpx 0 0;
 	align-items: center;
 }
 
 .list .item .right .line .users .pic-group .pic {
-	width: 48rpx !important;
-	height: 48rpx !important;
-}
-
-.list .item .right .line .users .pic-group .pic {
-	margin-left: -20rpx;
-	border: 4rpx solid #fff;
-	vertical-align: middle;
-}
-
-.list .item .right .line .users .pic-group .pic:first-child {
-	margin-left: 0rpx;
+	width: 44rpx !important;
+	height: 44rpx !important;
+	border: 2rpx solid #fff;
+	margin-right: -12rpx;
 }
 
 .list .item .right .line .users .num {
-	font-size: 24rpx;
-	color: #bbb;
+	font-size: 26rpx;
+	color: #86868B;
+	margin-left: 8rpx;
 }
 
 .tabs .tab-menu.cur {
 	color: #000 !important;
 	font-size: 30rpx !important;
 }
-
 
 .tabs .tab-menu.cur:after {
 	content: " ";

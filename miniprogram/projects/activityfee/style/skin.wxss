@@ -1,78 +1,105 @@
 page {
-	background-color: #f8f8f8;
+	/* 苹果系统级背景色 */
+	background-color: #F5F5F7;
 
-	--projectColor: #0820a8;
-	--projectColorLight: #CEF7FF;
-	--projectCompareColor: #F6DD00;
+	/* 主题色：使用苹果系统级颜色 */
+	--projectColor: #000000;  /* 主要文本颜色 */
+	--projectColorLight: #F5F5F7;  /* 系统背景色 */
+	--projectCompareColor: #1D1D1F;  /* 次要文本颜色 */
+
+	/* 文本颜色系统 */
+	--textPrimary: #1D1D1F;  /* 主要文本 */
+	--textSecondary: #86868B;  /* 次要文本 */
+	--textTertiary: #6E6E73;  /* 第三级文本 */
+
+	/* 背景色系统 */
+	--bgPrimary: #FFFFFF;  /* 主背景 */
+	--bgSecondary: #F5F5F7;  /* 次要背景 */
+	--bgTertiary: #FAFAFA;  /* 第三级背景 */
+
+	/* 边框和分割线 */
+	--borderColor: rgba(0, 0, 0, 0.1);
+
+	/* 状态颜色 */
+	--statusSuccess: #34C759;  /* 成功状态 */
+	--statusWarning: #FF9F0A;  /* 警告状态 */
+	--statusError: #FF3B30;  /* 错误状态 */
 
 	/*#### 父组件日历颜色定义*/
-	/* 整体颜色 */
-	--calendarPageColor: #fff;
-	/* 加重颜色*/
-	--calendarMainColor: #0820a8 !important;
-	/* 加重的亮颜色 用于选中日期的数据小圆点 */
-	--calendarLightColor: #0820a8;
+	--calendarPageColor: #FFFFFF;
+	--calendarMainColor: #000000 !important;
+	--calendarLightColor: #1D1D1F;
 }
 
 .bg-admin {
-	background-color: #2499f2;
+	background-color: var(--textPrimary);
 }
 
 .text-project {
-	color: var(--projectColor) !important;
+	color: var(--textPrimary) !important;
 }
 
 .bg-project {
-	background-color: var(--projectColor) !important;
+	background-color: var(--bgPrimary) !important;
 }
 
 .bg-project.light {
-	color: var(--projectColor) !important;
-	background-color: var(--projectColorLight) !important;
+	color: var(--textPrimary) !important;
+	background-color: var(--bgSecondary) !important;
 }
 
 .border-project {
-	border-color: var(--projectColor) !important;
+	border-color: var(--borderColor) !important;
 }
 
 .menu-project {
-	color: var(--projectColor) !important;
+	color: var(--textPrimary) !important;
 }
 
 .tabs .tab {
-	font-size: 28rpx !important;
+	font-size: 30rpx !important;
+	font-weight: 500;
 }
 
 .tabs .cur {
-	color: var(--projectColor) !important;
+	color: var(--textPrimary) !important;
+	font-weight: 600;
 }
 
 .tabs .tab-menu.cur:after {
-	background-color: var(--projectColor) !important;
+	background-color: var(--textPrimary) !important;
+	height: 4rpx;
 }
 
 .load-project {
-	color: #8799a3 !important;
+	color: var(--textTertiary) !important;
 }
 
 .padding-project {
-	padding-left: 25rpx !important;
-	padding-right: 25rpx !important;
+	padding-left: 24rpx !important;
+	padding-right: 24rpx !important;
 }
 
 .btn-project {
-	line-height: 80rpx;
-	height: 80rpx;
+	line-height: 88rpx;
+	height: 88rpx;
 	color: #fff;
-	background-color: var(--projectColor);
+	background-color: var(--textPrimary);
+	border-radius: 44rpx;
+	font-weight: 500;
+	transition: all 0.2s ease;
+}
+
+.btn-project:active {
+	opacity: 0.8;
 }
 
 .phone-button {
-	color: var(--projectColor) !important;
+	color: var(--textPrimary) !important;
 }
 
 .shadow-project {
-	box-shadow: 6rpx 6rpx 20rpx rgba(216, 220, 223, 0.5);
+	box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 
 .card-project,
@@ -85,7 +112,9 @@ page {
 .meet-list-box .item.card-project,
 .form-box.card-project,
 .bar .search-form {
-	border-radius: 20rpx !important;
+	border-radius: 16rpx !important;
+	background-color: var(--bgPrimary);
+	box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
 }
 
 .up-project {
@@ -98,20 +127,20 @@ page {
 	padding: 0;
 	width: 100%;
 	margin: 0;
+	border-radius: 16rpx;
 }
 
 .my-icon-project {
-	color: var(--projectColor) !important; 
+	color: var(--textPrimary) !important; 
 	font-size: 34rpx;
 }
-
 
 .meet-list-box {
 	padding: 20rpx 30rpx 30rpx 30rpx;
 }
 
 .title-project {
-	color: var(--projectTextColor) !important;
+	color: var(--textPrimary) !important;
 }
 
 .bar .search-form {

@@ -1,5 +1,5 @@
 module.exports = {
-	CLOUD_ID: 'temp-23423423424342', //你的云环境id   
+	CLOUD_ID: 'hackweek-8gauui0hb495673b', //你的云环境id   
 	COLLECTION_PRFIX: 'bx_',
 
 	IS_DEMO: false, //是否演示版 (后台不可操作提交动作)  

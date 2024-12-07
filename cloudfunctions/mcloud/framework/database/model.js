@@ -351,10 +351,16 @@ class Model {
 
 
 	static clearCreateData(data) {
+		console.log('=== clearCreateData start ===');
+		console.log('Input data:', data);
 
 		let dbStructure = Model.converDBStructure(this.DB_STRUCTURE);
+		console.log('DB Structure:', dbStructure);
 
 		for (let key in dbStructure) {
+			console.log(`Checking field: ${key}`);
+			console.log(`Field structure:`, dbStructure[key]);
+
 			if (!util.isDefined(dbStructure[key].type)) {
 				console.log('[数据填写错误1]字段类型未定义：' + key);
 				throw new AppError('数据填写错误1');
@@ -364,11 +370,17 @@ class Model {
 				throw new AppError('数据填写错误2');
 			}
 			if (!data.hasOwnProperty(key)) {
+				console.log(`Field ${key} not found in data`);
 				if (dbStructure[key].required) {
-					if (util.isDefined(dbStructure[key].defVal))
+					console.log(`Field ${key} is required`);
+					if (util.isDefined(dbStructure[key].defVal)) {
+						console.log(`Using default value for ${key}:`, dbStructure[key].defVal);
 						data[key] = dbStructure[key].defVal;
+					}
 					else {
-						console.log('[数据填写错误3]字段未填写：' + key);
+						console.log('[数据填写错误3]字段未填写且无默认值：' + key);
+						console.log('Current data:', data);
+						console.log('Current field structure:', dbStructure[key]);
 						throw new AppError('数据填写错误3 ' + key);
 					}
 				} else {
@@ -376,14 +388,22 @@ class Model {
 						console.log('[数据填写错误4]非必填字段必须有缺省值：' + key);
 						throw new AppError('数据填写错误4');
 					}
+					console.log(`Using default value for optional field ${key}:`, dbStructure[key].defVal);
 					data[key] = dbStructure[key].defVal;
 				}
+			} else {
+				console.log(`Field ${key} found in data with value:`, data[key]);
 			}
 		}
+
+		console.log('Before clearDirtyData:', data);
 		this.clearDirtyData(data, dbStructure);
+		console.log('After clearDirtyData:', data);
 
 		data = this.converDataType(data, dbStructure);
+		console.log('After converDataType:', data);
 
+		console.log('=== clearCreateData end ===');
 		return data;
 	}
 

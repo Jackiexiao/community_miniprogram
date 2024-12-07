@@ -55,40 +55,37 @@
 		"projects/activityfee/pages/search/search"
 	],
 	"window": {
-		"backgroundColor": "#f1f1f1",
+		"backgroundColor": "#F5F5F7",
 		"backgroundTextStyle": "dark",
-		"navigationBarBackgroundColor": "#0820a8",
-		"navigationBarTitleText": "社区 Demo",
-		"navigationBarTextStyle": "white"
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"navigationBarTitleText": "社区",
+		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
-		"color": "#666666",
-		"selectedColor": "#0066ff",
-		"backgroundColor": "#ffffff",
+		"custom": true,
+		"color": "#86868B",
+		"selectedColor": "#000000",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "white",
+		"height": "120rpx",
 		"list": [
 			{
 				"pagePath": "projects/activityfee/pages/activity/index/activity_index",
-				"text": "活动",
-				"iconPath": "projects/activityfee/images/tabbar/activity.png",
-				"selectedIconPath": "projects/activityfee/images/tabbar/activity_cur.png"
+				"text": "活动"
 			},
 			{
 				"pagePath": "projects/activityfee/pages/card/index/card_index",
-				"text": "名片夹",
-				"iconPath": "projects/activityfee/images/tabbar/card.png",
-				"selectedIconPath": "projects/activityfee/images/tabbar/card_cur.png"
+				"text": "名片夹"
 			},
 			{
 				"pagePath": "projects/activityfee/pages/my/index/my_index",
-				"text": "我的",
-				"iconPath": "projects/activityfee/images/tabbar/my.png",
-				"selectedIconPath": "projects/activityfee/images/tabbar/my_cur.png"
+				"text": "我的"
 			}
 		]
 	}, 
 	"permission": {
 		"scope.userLocation": {
-			"desc": "���取你当前位置信息用于小程序位置接口的效果展示"
+			"desc": "获取你当前位置信息用于小程序位置接口的效果展示"
 		}
 	},
 	"requiredPrivateInfos": [
