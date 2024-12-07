@@ -5,22 +5,20 @@
 			<view class="list">
 				<view class="item card-project" wx:for="{{dataList.list}}" wx:key="key" bindtap="url" data-url="../detail/activity_detail?id={{item._id}}">
 					<view class="image-wrapper">
-						<block wx:if="{{item.ACTIVITY_OBJ.cover[0]}}">
-							<image class="activity-image loading" mode="aspectFill" lazy-load="{{true}}" src="{{item.ACTIVITY_OBJ.cover[0]}}" />
+						<block wx:if="{{item.ACTIVITY_OBJ && item.ACTIVITY_OBJ.cover && item.ACTIVITY_OBJ.cover.length > 0 && item.ACTIVITY_OBJ.cover[0].length > 0}}">
+							<image class="activity-image" mode="aspectFill" lazy-load="{{true}}" src="{{item.ACTIVITY_OBJ.cover[0]}}" />
 						</block>
-						<view wx:else class="placeholder-image">
-							<view class="placeholder-content">
-								<view class="placeholder-icon">
-									<text class="icon-calendar"></text>
-								</view>
-								<view class="placeholder-info">
-									<text class="placeholder-title">{{item.ACTIVITY_TITLE}}</text>
-									<text class="placeholder-desc">精彩活动即将开始</text>
-								</view>
-								<view class="placeholder-pattern">
-									<view class="pattern-circle"></view>
-									<view class="pattern-line"></view>
-								</view>
+						<view wx:else class="placeholder-content">
+							<view class="placeholder-icon">
+								<text class="icon-activity"></text>
+							</view>
+							<view class="placeholder-info">
+								<text class="placeholder-title">{{item.ACTIVITY_TITLE}}</text>
+								<text class="placeholder-desc">精彩活动即将开始</text>
+							</view>
+							<view class="placeholder-pattern">
+								<view class="pattern-circle"></view>
+								<view class="pattern-line"></view>
 							</view>
 						</view>
 					</view>
@@ -36,7 +34,7 @@
 						<view class="footer">
 							<view class="users">
 								<view class="avatar-group">
-									<image wx:for="{{item.ACTIVITY_USER_LIST}}" wx:for-index="idx" wx:key="key" wx:if="{{idx<3}}" wx:for-item="itm" class="avatar loading" mode="aspectFill" lazy-load="{{true}}" src="{{itm.USER_PIC}}" />
+									<image wx:for="{{item.ACTIVITY_USER_LIST}}" wx:for-index="idx" wx:key="key" wx:if="{{idx<3}}" wx:for-item="itm" class="avatar" mode="aspectFill" lazy-load="{{true}}" src="{{itm.USER_PIC}}" />
 								</view>
 								<text class="join-count">{{item.ACTIVITY_JOIN_CNT || '0'}}人报名</text>
 							</view>
