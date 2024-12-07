@@ -7,65 +7,112 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	position: relative; 
+	position: relative;
+	background-color: #F5F5F7;
 }
 
 .login {
-	width: 500rpx;
-	background-color: #fff;
-	min-height: 550rpx;
-	border-radius: 20rpx;
+	width: 600rpx;
+	background-color: #FFFFFF;
+	min-height: 700rpx;
+	border-radius: 24rpx;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	align-items: center;
-	padding: 50rpx 20rpx;
-	margin-top: -100rpx;
+	padding: 48rpx 32rpx;
+	box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.05);
 }
 
-.login button {
-	width: 85%;
-	color: #fff;
-	font-size: 32rpx;
+.login-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 48rpx;
 }
 
-.login .hint {
-	width: 100%;
-	color: #000;
-	font-weight: bold;
+.pic {
+	width: 120rpx;
+	height: 120rpx;
+	font-size: 80rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 24rpx;
+	color: #007AFF;
+}
+
+.hint {
+	color: #1C1C1E;
+	font-weight: 600;
 	font-size: 36rpx;
 	text-align: center;
 }
 
-.login .return {
+.form-container {
 	width: 100%;
-	font-size: 30rpx;
-	text-align: center;
-	font-size: 26rpx;
+	padding: 0 24rpx;
 }
 
-.pic {
-	width: 180rpx;
-	height: 180rpx;
-	font-size: 130rpx;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.form-group {
+	background: #F5F5F7;
+	border-radius: 16rpx;
+	padding: 16rpx 24rpx;
+	margin-bottom: 24rpx;
 }
 
-.foot-bottom {
+.form-group input {
+	font-size: 32rpx;
+	color: #1C1C1E;
 	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	bottom: 50rpx;
-}
-
-.site-footer {
-	color: #fff !important;
 }
 
 .form-group .title {
-    color:#333;
+	font-size: 28rpx;
+	color: #86868B;
+	margin-bottom: 8rpx;
+}
+
+.btn-login {
+	width: 100%;
+	height: 88rpx;
+	background: #007AFF;
+	color: #FFFFFF;
+	font-size: 32rpx;
+	font-weight: 500;
+	border-radius: 44rpx;
+	margin-top: 48rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-login:active {
+	background: #0066CC;
+}
+
+.footer {
+	margin-top: 48rpx;
+	text-align: center;
+}
+
+.hint-text {
+	font-size: 26rpx;
+	color: #86868B;
+	margin-bottom: 16rpx;
+}
+
+.back-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 26rpx;
+	color: #007AFF;
+}
+
+.back-btn .icon-back {
+	margin-right: 8rpx;
+}
+
+.phc {
+	color: #86868B;
 }

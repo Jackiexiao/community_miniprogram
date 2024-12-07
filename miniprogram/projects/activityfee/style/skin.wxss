@@ -2,33 +2,63 @@ page {
 	/* 苹果系统级背景色 */
 	background-color: #F5F5F7;
 
+	/* iOS 系统颜色 */
+	--iosBlue: #007AFF;
+	--iosGreen: #34C759;
+	--iosIndigo: #5856D6;
+	--iosOrange: #FF9500;
+	--iosPink: #FF2D55;
+	--iosPurple: #AF52DE;
+	--iosRed: #FF3B30;
+	--iosYellow: #FFCC00;
+	--iosTeal: #5AC8FA;
+	--iosGray: #8E8E93;
+
 	/* 主题色：使用苹果系统级颜色 */
-	--projectColor: #000000;  /* 主要文本颜色 */
-	--projectColorLight: #F5F5F7;  /* 系统背景色 */
-	--projectCompareColor: #1D1D1F;  /* 次要文本颜色 */
+	--projectColor: var(--iosBlue);
+	--projectColorLight: #F5F5F7;
+	--projectCompareColor: var(--iosBlue);
 
 	/* 文本颜色系统 */
-	--textPrimary: #1D1D1F;  /* 主要文本 */
-	--textSecondary: #86868B;  /* 次要文本 */
-	--textTertiary: #6E6E73;  /* 第三级文本 */
+	--textPrimary: #1D1D1F;
+	--textSecondary: #86868B;
+	--textTertiary: #6E6E73;
+	--textQuaternary: #8E8E93;
 
 	/* 背景色系统 */
-	--bgPrimary: #FFFFFF;  /* 主背景 */
-	--bgSecondary: #F5F5F7;  /* 次要背景 */
-	--bgTertiary: #FAFAFA;  /* 第三级背景 */
+	--bgPrimary: #FFFFFF;
+	--bgSecondary: #F5F5F7;
+	--bgTertiary: #FAFAFA;
+	--bgQuaternary: #F2F2F7;
 
 	/* 边框和分割线 */
-	--borderColor: rgba(0, 0, 0, 0.1);
+	--borderColor: rgba(60, 60, 67, 0.12);
+	--separatorColor: rgba(60, 60, 67, 0.06);
 
 	/* 状态颜色 */
-	--statusSuccess: #34C759;  /* 成功状态 */
-	--statusWarning: #FF9F0A;  /* 警告状态 */
-	--statusError: #FF3B30;  /* 错误状态 */
+	--statusSuccess: var(--iosGreen);
+	--statusWarning: var(--iosOrange);
+	--statusError: var(--iosRed);
+	--statusInfo: var(--iosBlue);
 
-	/*#### 父组件日历颜色定义*/
-	--calendarPageColor: #FFFFFF;
-	--calendarMainColor: #000000 !important;
-	--calendarLightColor: #1D1D1F;
+	/* 投影 */
+	--shadowSmall: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+	--shadowMedium: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+	--shadowLarge: 0 8rpx 24rpx rgba(0, 0, 0, 0.12);
+
+	/* 圆角 */
+	--radiusSmall: 8rpx;
+	--radiusMedium: 16rpx;
+	--radiusLarge: 24rpx;
+	--radiusXLarge: 32rpx;
+	--radiusCircular: 999rpx;
+
+	/* 间距 */
+	--spacingXSmall: 8rpx;
+	--spacingSmall: 16rpx;
+	--spacingMedium: 24rpx;
+	--spacingLarge: 32rpx;
+	--spacingXLarge: 48rpx;
 }
 
 .bg-admin {
@@ -84,7 +114,7 @@ page {
 	line-height: 88rpx;
 	height: 88rpx;
 	color: #fff;
-	background-color: var(--textPrimary);
+	background-color: var(--projectColor);
 	border-radius: 44rpx;
 	font-weight: 500;
 	transition: all 0.2s ease;

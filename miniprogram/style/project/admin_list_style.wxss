@@ -1,13 +1,58 @@
+.admin-comm-list {
+  padding: 24rpx 16rpx;
+  background: #F5F5F7;
+}
+
+.admin-comm-list .item {
+  background: #FFFFFF;
+  border-radius: 16rpx;
+  margin-bottom: 16rpx;
+  padding: 24rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.admin-comm-list .item .info {
+  padding: 0;
+}
 
 .admin-comm-list .item .info .oprt {
-	padding: 0rpx 0rpx;
-	display: flex;
-	justify-content: space-between;
+  padding: 16rpx 0 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
 }
 
 .admin-comm-list .item .info .oprt .btn {
-	width: 155rpx;
-	margin-right: 0rpx !important;
-	height: 60rpx !important;
-	padding: 0 0rpx;
+  min-width: 140rpx;
+  height: 72rpx !important;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  border-radius: 36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #007AFF;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+
+.admin-comm-list .item .info .oprt .btn.btn-red {
+  background: #FF3B30;
+}
+
+.admin-comm-list .item .info .oprt .btn.btn-grey {
+  background: #8E8E93;
+}
+
+.admin-comm-list .title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #1C1C1E;
+  margin-bottom: 8rpx;
+}
+
+.admin-comm-list .desc {
+  font-size: 28rpx;
+  color: #86868B;
+  line-height: 1.5;
 }

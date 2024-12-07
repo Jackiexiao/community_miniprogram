@@ -57,15 +57,15 @@
 	"window": {
 		"backgroundColor": "#F5F5F7",
 		"backgroundTextStyle": "dark",
-		"navigationBarBackgroundColor": "#FFFFFF",
+		"navigationBarBackgroundColor": "#F5F5F7",
 		"navigationBarTitleText": "社区",
 		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
 		"custom": true,
-		"color": "#86868B",
-		"selectedColor": "#000000",
-		"backgroundColor": "#FFFFFF",
+		"color": "#8E8E93",
+		"selectedColor": "#007AFF",
+		"backgroundColor": "#F5F5F7",
 		"borderStyle": "white",
 		"list": [
 			{

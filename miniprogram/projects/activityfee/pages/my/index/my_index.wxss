@@ -7,8 +7,8 @@
 }
 
 .main .upside {
-	background-color: rgba(75, 148, 231, 0.1);
-	height: 510rpx;
+	background-color: #F5F5F7;
+	height: 400rpx;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -18,20 +18,11 @@
 	padding-top: 30rpx;
 }
 
-.main .upside .upImg {
-	height: inherit;
-	width: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
 .main .upside .user-bar {
 	width: 100%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	z-index: 9999;
 	flex-direction: column;
 }
 
@@ -40,12 +31,12 @@
 	width: 160rpx;
 	border: 0rpx;
 	font-size: 80rpx;
-	border-radius: 50%;
-	background-color: rgba(255, 255, 255, 1);
+	border-radius: 80rpx;
+	background-color: #FFFFFF;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 6rpx solid var(--projectCompareColor);
+	box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
 }
 
 .main .upside .user-bar .avatar image {
@@ -59,21 +50,20 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	color: #fff;
 	box-sizing: border-box;
 }
 
 .main .upside .user-bar .detail .name {
-	font-size: 36rpx;
-	font-weight: bold;
-	color: #fff;
-	margin-top: 10rpx;
+	font-size: 34rpx;
+	font-weight: 600;
+	color: #1C1C1E;
+	margin-top: 16rpx;
 }
 
 .main .upside .user-bar .detail .desc {
-	font-size: 26rpx;
-	margin-top: 5rpx;
-	color: #fff;
+	font-size: 28rpx;
+	margin-top: 8rpx;
+	color: #86868B;
 }
 
 .main .down {
@@ -82,20 +72,21 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 20rpx 20rpx !important;
-	margin-top: -100rpx;
+	padding: 24rpx 16rpx !important;
+	margin-top: -80rpx;
 	position: relative;
 }
-
 
 .main .down .data {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 150rpx;
-	padding: 0rpx 40rpx 0rpx 40rpx;
+	height: 160rpx;
+	padding: 0 32rpx;
 	width: 100%;
-	background-color: #fff;
+	background-color: #FFFFFF;
+	border-radius: 16rpx;
+	box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
 }
 
 .main .down .data view {
@@ -193,4 +184,3 @@
 .main .upside-shadow {
 	box-shadow: unset
 }
- 

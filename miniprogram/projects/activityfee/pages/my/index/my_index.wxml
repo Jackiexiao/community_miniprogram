@@ -2,7 +2,6 @@
 
 	<!--top area begin-->
 	<view class="upside upside-shadow" bindtap="url" data-url="{{user?'../edit/my_edit':'../reg/my_reg'}}">
-		<image mode="aspectFill" lazy-load class="upImg loading" src="../../../images/my.jpg" />
 		<view class="user-bar">
 			<view class="avatar" wx:if="{{!user.USER_PIC}}">
 				<image mode="aspectFit" src="../../../images/tabbar/my_cur.png" />

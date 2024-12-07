@@ -15,7 +15,8 @@ class BaseProjectService extends BaseService {
 		let F = (c) => 'bx_' + c;
 		const INSTALL_CL = 'setup_activityfee';
 		const COLLECTIONS = ['setup', 'admin', 'log', 'news', 'activity', 'activity_join', 'comment', 'fav', 'user', 'pay'];
-		const CONST_PIC = '/images/cover.gif';
+		// 默认图片为空，前端会显示占位图
+		const CONST_PIC = '';
 
 
 		const NEWS_CATE = '1=通知公告';
