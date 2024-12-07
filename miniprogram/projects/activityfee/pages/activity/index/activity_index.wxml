@@ -1,3 +1,5 @@
+<cmpt-nav title="活动"></cmpt-nav>
+
 <view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
 <block wx:else>
 	<cmpt-comm-list type="activity-list" _params="{{_params}}" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" sortMenusDefaultIndex="0" route="activity/list" topBottom="120" isTotalMenu="{{true}}" placeholder="搜索活动" bind:list="bindCommListCmpt">

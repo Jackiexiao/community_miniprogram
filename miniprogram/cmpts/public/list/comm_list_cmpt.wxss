@@ -38,7 +38,6 @@
 	color: #000;
 }
 
-
 .sort {
 	position: absolute;
 	top: 178rpx;
@@ -57,35 +56,51 @@
 	background-color: #fff;
 }
 
-
 /**头部*/
 .top_bar {
 	width: 100%;
-}
-
-.top_bar_scroll {
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 	position: fixed;
-	top: 0rpx;
+	top: calc(env(safe-area-inset-top) + 44px); /* 状态栏 + 导航栏高度 */
 	left: 0;
-	z-index: 99;
-	background: #fff;
-
-	z-index: 999;
+	z-index: 98;
+	background-color: #F7F7F7;
+	padding: 8rpx 0;
 }
 
+.bar {
+	background-color: #F7F7F7;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.bar.search {
+	padding: 8rpx 20rpx;
+}
+
+.bar.fixed {
+	position: fixed;
+	z-index: 98;
+	top: calc(env(safe-area-inset-top) + 44px); /* 状态栏 + 导航栏高度 */
+	left: 0;
+	right: 0;
+}
 
 .box-list {
+	width: 100%;
+	padding: 0 20rpx;
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
-	overflow: hidden;
+	align-items: center;
 }
 
 .box-list-scroll {
 	flex: 1;
 	height: 1px;
 }
-
 
 .top-button {
 	position: fixed;
@@ -158,4 +173,26 @@
 
 .search-date .search-date-picker {
 	width: 150rpx;
+}
+
+.comm-list-box {
+	width: 100%;
+	box-sizing: border-box;
+	position: relative;
+	padding-top: 110px; /* 导航栏 + 搜索栏的高度 */
+	z-index: 999;
+}
+
+.comm-list-search {
+	position: fixed;
+	width: 100%;
+	top: calc(env(safe-area-inset-top) + 178px); /* 状态栏 + 导航栏高度 + top_bar高度 */
+	left: 0;
+	z-index: 999;
+	background-color: #F7F7F7;
+	padding: 10rpx 20rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
 }

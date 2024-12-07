@@ -58,8 +58,9 @@
 		"backgroundColor": "#F5F5F7",
 		"backgroundTextStyle": "dark",
 		"navigationBarBackgroundColor": "#F5F5F7",
-		"navigationBarTitleText": "社区",
-		"navigationBarTextStyle": "black"
+		"navigationBarTitleText": "",
+		"navigationBarTextStyle": "black",
+		"navigationStyle": "custom"
 	},
 	"tabBar": {
 		"custom": true,
@@ -93,7 +94,8 @@
 	"usingComponents": {
 		"cmpt-comm-list": "/cmpts/public/list/comm_list_cmpt",
 		"cmpt-picker": "/cmpts/public/picker/picker_cmpt",
-		"cmpt-modal": "/cmpts/public/modal/modal_cmpt"
+		"cmpt-modal": "/cmpts/public/modal/modal_cmpt",
+		"cmpt-nav": "/cmpts/public/nav/nav_cmpt"
 	},
 	"resolveAlias": {
 		"@/*": "/*"

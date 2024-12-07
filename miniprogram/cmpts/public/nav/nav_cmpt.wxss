@@ -1,0 +1,33 @@
+.nav-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(247, 247, 247, 0.98);
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-bar-inner {
+  display: flex;
+  align-items: flex-end;
+  padding: 0 16px;
+}
+
+.nav-bar-content {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 8px;
+}
+
+.nav-bar-title {
+  font-size: 34px;
+  line-height: 41px;
+  font-weight: 700;
+  color: #000;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+  text-align: left;
+  padding-left: 8px;
+}

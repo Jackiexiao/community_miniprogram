@@ -1,6 +1,9 @@
+@import "/style/public/project.wxss";
 @import "/projects/activityfee/style/skin.wxss";
 
-
+page {
+	background-color: #F7F7F7;
+}
 
 .main {
 	padding: 0;

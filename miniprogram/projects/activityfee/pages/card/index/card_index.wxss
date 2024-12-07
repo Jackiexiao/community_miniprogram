@@ -3,11 +3,13 @@
 @import "/style/apple.wxss";
 
 page {
-    background-color: var(--apple-gray-1) !important;
+    background-color: #F7F7F7;
+    padding-top: calc(env(safe-area-inset-top) + 88px); /* 状态栏 + 导航栏高度 */
 }
 
 .main {
-    padding: 24rpx;
+    padding: 0;
+    background-color: #F7F7F7;
 }
 
 .card-section {

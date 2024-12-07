@@ -1,3 +1,5 @@
+<cmpt-nav title="我的"></cmpt-nav>
+
 <view class="main {{skin.IS_SUB?'sub-margin-bottom':''}}">
 
 	<!--top area begin-->
