@@ -1,38 +1,45 @@
 .tab-bar {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120rpx;
+  bottom: 16rpx;
+  left: 24rpx;
+  right: 24rpx;
+  height: 110rpx;
   background: #FFFFFF;
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  padding-bottom: constant(safe-area-inset-bottom);
-  padding-bottom: env(safe-area-inset-bottom);
-  border-top: 0.5px solid rgba(0, 0, 0, 0.1);
+  align-items: center;
+  padding-bottom: 0;
+  margin-bottom: env(safe-area-inset-bottom);
+  border-radius: 16rpx;
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.12);
 }
 
 .tab-bar-item {
+  position: relative;
   flex: 1;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
+}
+
+.tab-bar-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 40rpx;
+  width: 2rpx;
+  background: rgba(0, 0, 0, 0.15);
 }
 
 .tab-text {
-  font-size: 34rpx;
-  font-weight: 500;
-  line-height: 120rpx;
-  height: 120rpx;
-  text-align: center;
-  width: 100%;
+  font-size: 30rpx;
+  color: #86868B;
   transition: all 0.2s ease;
-  letter-spacing: 0.5px;
 }
 
-/* 选中状态 */
-.tab-text.selected {
-  font-weight: 600;
+.tab-text.active {
+  font-weight: 500;
+  color: #007AFF;
 }

@@ -65,7 +65,7 @@
 		"custom": true,
 		"color": "#8E8E93",
 		"selectedColor": "#007AFF",
-		"backgroundColor": "#F5F5F7",
+		"backgroundColor": "transparent",
 		"borderStyle": "white",
 		"list": [
 			{
