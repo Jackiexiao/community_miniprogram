@@ -1,6 +1,6 @@
-<view>
-	<cmpt-nav title="名片夹"></cmpt-nav>
-
+<view class="container">
+	<cmpt-nav title="名片夹" class="fixed"></cmpt-nav>
+	
 	<!-- 名片列表 -->
 	<view class="main">
 		<view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>

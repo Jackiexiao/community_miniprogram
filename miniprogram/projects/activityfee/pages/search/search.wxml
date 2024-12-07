@@ -1,1 +1,4 @@
-<include src="../../../../tpls/project/search_tpl.wxml" />
+<view class="container">
+    <cmpt-nav title="搜索"></cmpt-nav>
+    <include src="../../../../tpls/project/search_tpl.wxml" />
+</view>
