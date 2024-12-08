@@ -21,12 +21,30 @@
 					<text class="icon-location"></text>
 					<text>{{card.USER_CITY}}</text>
 				</view>
+
+				<view class="profession-status" wx:if="{{card.USER_PROFESSION || card.USER_STATUS}}">
+					<text wx:if="{{card.USER_PROFESSION}}">{{card.USER_PROFESSION}}</text>
+					<text wx:if="{{card.USER_PROFESSION && card.USER_STATUS}}" class="separator">·</text>
+					<text wx:if="{{card.USER_STATUS}}">{{card.USER_STATUS}}</text>
+				</view>
 			</view>
 
 			<view class="section" wx:if="{{card.USER_MOBILE}}">
 				<view class="item">
 					<text class="label">联系方式</text>
 					<text class="value">{{card.USER_MOBILE}}</text>
+				</view>
+			</view>
+
+			<view class="section contact-section" wx:if="{{card.contactList && card.contactList.length > 0}}">
+				<view class="title">联系方式</view>
+				<view class="contact-list">
+					<view class="contact-item" wx:for="{{card.contactList}}" wx:key="index" bindtap="copyContact" data-content="{{item.content}}">
+						<text class="{{item.icon}}"></text>
+						<text class="contact-category">{{item.category}}</text>
+						<text class="contact-content">{{item.content}}</text>
+						<text class="icon-copy"></text>
+					</view>
 				</view>
 			</view>
 

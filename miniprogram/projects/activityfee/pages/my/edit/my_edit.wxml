@@ -24,14 +24,17 @@
                 <text class="form-title">
                     <text class="must">*</text>性别
                 </text>
-                <radio-group class="radio-group" bindchange="bindGenderChange">
-                    <label class="radio-item">
-                        <radio value="1" checked="{{formData.gender === 1}}"/>男
-                    </label>
-                    <label class="radio-item">
-                        <radio value="2" checked="{{formData.gender === 2}}"/>女
-                    </label>
-                </radio-group>
+                <view class="tags-group">
+                    <view class="tag-item {{formData.gender === 1 ? 'active' : ''}}" 
+                        bindtap="bindGenderSelect" 
+                        data-value="1">男</view>
+                    <view class="tag-item {{formData.gender === 2 ? 'active' : ''}}" 
+                        bindtap="bindGenderSelect" 
+                        data-value="2">女</view>
+                    <view class="tag-item {{formData.gender === 3 ? 'active' : ''}}" 
+                        bindtap="bindGenderSelect" 
+                        data-value="3">其他</view>
+                </view>
 
                 <text class="form-title">
                     <text class="must">*</text>手机号码
@@ -44,9 +47,45 @@
                 <input placeholder="填写您所在的城市" model:value="{{formData.city}}" maxlength="50" bindinput="onInput" data-field="city"></input>
 
                 <text class="form-title">
+                    <text class="must">*</text>职业领域
+                </text>
+                <view class="tags-group">
+                    <view class="tag-item {{formData.profession === item ? 'active' : ''}}" 
+                        wx:for="{{professionOptions}}" 
+                        wx:key="*this"
+                        bindtap="bindProfessionSelect" 
+                        data-value="{{item}}">{{item}}</view>
+                </view>
+
+                <text class="form-title">
+                    <text class="must">*</text>目前状态
+                </text>
+                <view class="tags-group">
+                    <view class="tag-item {{formData.status === item ? 'active' : ''}}" 
+                        wx:for="{{statusOptions}}" 
+                        wx:key="*this"
+                        bindtap="bindStatusSelect" 
+                        data-value="{{item}}">{{item}}</view>
+                </view>
+
+                <text class="form-title">
                     <text class="must">*</text>自我介绍
                 </text>
                 <textarea placeholder="请简单介绍一下自己" model:value="{{formData.desc}}" maxlength="500" style="min-height:150rpx" bindinput="onInput" data-field="desc"></textarea>
+
+                <text class="form-title">联系方式</text>
+                <view class="contact-list">
+                    <view class="contact-item" wx:for="{{formData.contactList}}" wx:key="index">
+                        <text class="{{item.icon}}"></text>
+                        <text class="contact-category">{{item.category}}</text>
+                        <text class="contact-content">{{item.content}}</text>
+                        <text class="icon-delete" bindtap="deleteContact" data-index="{{index}}"></text>
+                    </view>
+                </view>
+                <view class="add-contact" bindtap="showAddContact">
+                    <text class="icon-add"></text>
+                    <text>添加联系方式</text>
+                </view>
 
                 <text class="form-title">可分享资源</text>
                 <textarea placeholder="您可以分享的资源" model:value="{{formData.resource}}" maxlength="500" style="min-height:100rpx" bindinput="onInput" data-field="resource"></textarea>
@@ -57,5 +96,43 @@
 
             <button class="btn-submit margin-top" form-type="submit">提交</button>
         </form>
+    </view>
+</view>
+
+<!-- 联系方式弹窗 -->
+<view class="modal" wx:if="{{showContactModal}}">
+    <view class="modal-mask" bindtap="cancelContact"></view>
+    <view class="modal-content">
+        <view class="modal-header">
+            <text>添加联系方式</text>
+            <text class="icon-close" bindtap="cancelContact"></text>
+        </view>
+        
+        <view class="modal-body">
+            <view class="section-title">
+                <text>选择类别</text>
+                <text class="toggle-btn" bindtap="toggleCategoryEdit">{{isEditingCategory ? '选择预设' : '自定义'}}</text>
+            </view>
+
+            <view class="category-list" wx:if="{{!isEditingCategory}}">
+                <view wx:for="{{contactCategories}}" wx:key="index" 
+                    class="category-item {{curContactCategory == index ? 'selected' : ''}}"
+                    bindtap="onContactCategoryTap" data-category="{{index}}">
+                    <text class="{{item}}"></text>
+                    <text>{{index}}</text>
+                </view>
+            </view>
+            <view class="custom-category" wx:else>
+                <input placeholder="输入自定义类别" bindinput="onCustomCategoryInput" value="{{customCategory}}" maxlength="10"/>
+            </view>
+
+            <view class="section-title">内容</view>
+            <input class="content-input" placeholder="请输入内容" bindinput="onContactContentInput" value="{{curContactContent}}"/>
+        </view>
+
+        <view class="modal-footer">
+            <button class="btn-cancel" bindtap="cancelContact">取消</button>
+            <button class="btn-confirm" bindtap="saveContact">确定</button>
+        </view>
     </view>
 </view>

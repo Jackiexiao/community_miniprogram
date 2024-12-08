@@ -45,5 +45,22 @@ Page({
                 isLoad: null
             });
         }
+    },
+
+    onShareAppMessage: function () {
+        return {
+            title: this.data.card.USER_NAME + '的名片',
+            path: pageHelper.fmtURLByPID('/pages/card/detail/card_detail?id=' + this.data.card.id)
+        }
+    },
+
+    copyContact: function(e) {
+        let content = e.currentTarget.dataset.content;
+        wx.setClipboardData({
+            data: content,
+            success: function() {
+                pageHelper.showSuccToast('已复制到剪贴板');
+            }
+        });
     }
 });

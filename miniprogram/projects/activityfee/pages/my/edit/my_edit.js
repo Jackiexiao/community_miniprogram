@@ -1,139 +1,222 @@
 const pageHelper = require('../../../../../helper/page_helper.js');
 const cloudHelper = require('../../../../../helper/cloud_helper.js');
-const ProjectBiz = require('../../../biz/project_biz.js');
 const validate = require('../../../../../helper/validate.js');
 const PassportBiz = require('../../../../../comm/biz/passport_biz.js');
+const projectSetting = require('../../../public/project_setting.js');
+const contactConfig = require('../../../config/contact_config.js');
 
 Page({
     data: {
         isLoad: false,
-        USER_PIC: '',
         formData: {
             name: '',
             realName: '',
-            gender: 1,
+            gender: '',
             mobile: '',
             city: '',
             desc: '',
-            resource: '',
-            needs: '',
-            pic: '',
-            forms: []
+            profession: '',
+            status: '',
+            contact: []
+        },
+
+        genderOptions: ['请选择性别', '男', '女', '其他'],
+        professionOptions: ['开发', '产品', '设计', '运营', '硬件', '销售', '咨询', '运维', '研究', '媒体', '投资', '法务', '教师', '学生', '艺术', '其他'],
+        statusOptions: ['在职', '创业', '自由', '求职', '在校'],
+
+        contactCategories: contactConfig.CONTACT_CATEGORIES,
+        defaultContactIcon: contactConfig.DEFAULT_ICON,
+        
+        showContactModal: false,
+        currentContact: {
+            category: '',
+            content: '',
+            customCategory: ''
         }
     },
 
-    onLoad: async function (options) {
-        ProjectBiz.initPage(this);
-        await this._loadDetail();
+    onLoad: function() {
+        this._loadDetail();
     },
 
-    _loadDetail: async function () {
+    _loadDetail: async function() {
         try {
             let opts = {
                 title: 'bar'
             }
-            let user = await cloudHelper.callCloudData('passport/my_detail', {}, opts);
-            
+            let user = await cloudHelper.callCloudData('passport/user_detail', {}, opts);
             if (!user) {
                 this.setData({
-                    isLoad: null
+                    isLoad: true
                 });
                 return;
             }
 
             this.setData({
                 isLoad: true,
-                USER_PIC: user.USER_PIC,
                 formData: {
                     name: user.USER_NAME || '',
                     realName: user.USER_REAL_NAME || '',
-                    gender: user.USER_GENDER || 1,
+                    gender: user.USER_GENDER || '',
                     mobile: user.USER_MOBILE || '',
                     city: user.USER_CITY || '',
                     desc: user.USER_DESC || '',
                     resource: user.USER_RESOURCE || '',
                     needs: user.USER_NEEDS || '',
-                    pic: user.USER_PIC || '',
-                    forms: user.USER_FORMS || []
+                    profession: user.USER_PROFESSION || '',
+                    status: user.USER_STATUS || '',
+                    contact: user.USER_CONTACT || []
                 }
             });
 
         } catch (err) {
-            this.setData({
-                isLoad: null
-            });
+            console.error(err);
         }
     },
 
-    onInput: function(e) {
-        const field = e.currentTarget.dataset.field;
-        const value = e.detail.value;
+    bindGenderSelect(e) {
         this.setData({
-            [`formData.${field}`]: value
+            'formData.gender': Number(e.currentTarget.dataset.value)
         });
     },
 
-    bindGenderChange: function(e) {
-        const value = Number(e.detail.value);
+    bindProfessionSelect(e) {
         this.setData({
-            'formData.gender': value
+            'formData.profession': e.currentTarget.dataset.value
         });
     },
 
-    bindFormSubmit: async function (e) {
+    bindStatusSelect(e) {
+        this.setData({
+            'formData.status': e.currentTarget.dataset.value
+        });
+    },
+
+    showAddContact() {
+        this.setData({
+            showContactModal: true,
+            currentContact: {
+                category: '',
+                content: '',
+                customCategory: ''
+            }
+        });
+    },
+
+    hideContactModal() {
+        this.setData({
+            showContactModal: false
+        });
+    },
+
+    onContactInput(e) {
+        const { field } = e.currentTarget.dataset;
+        let value = e.detail.value;
+        
+        // 如果是点击预设类别
+        if (field === 'category') {
+            value = e.currentTarget.dataset.value;
+            // 清空自定义类别
+            this.setData({
+                'currentContact.customCategory': ''
+            });
+        }
+        
+        this.setData({
+            [`currentContact.${field}`]: value
+        });
+    },
+
+    addContact() {
+        const { currentContact, contactCategories } = this.data;
+        
+        // 验证输入
+        if (!currentContact.category) {
+            wx.showToast({
+                title: '请选择类别',
+                icon: 'none'
+            });
+            return;
+        }
+        
+        if (currentContact.category === 'custom' && !currentContact.customCategory) {
+            wx.showToast({
+                title: '请输入自定义类别名称',
+                icon: 'none'
+            });
+            return;
+        }
+        
+        if (!currentContact.content) {
+            wx.showToast({
+                title: '请输入内容',
+                icon: 'none'
+            });
+            return;
+        }
+
+        // 准备新的联系方式数据
+        const newContact = {
+            category: currentContact.category === 'custom' ? currentContact.customCategory : contactCategories[currentContact.category].title,
+            content: currentContact.content,
+            icon: currentContact.category === 'custom' ? this.data.defaultContactIcon : contactCategories[currentContact.category].icon
+        };
+
+        // 添加到联系方式列表
+        const contacts = this.data.formData.contact || [];
+        contacts.push(newContact);
+
+        this.setData({
+            'formData.contact': contacts,
+            showContactModal: false,
+            currentContact: {
+                category: '',
+                content: '',
+                customCategory: ''
+            }
+        });
+    },
+
+    deleteContact(e) {
+        const index = e.currentTarget.dataset.index;
+        const contacts = this.data.formData.contact;
+        contacts.splice(index, 1);
+        this.setData({
+            'formData.contact': contacts
+        });
+    },
+
+    bindSubmitForm: async function() {
         try {
             let data = this.data.formData;
-            
-            let validData = validate.check(data, {
-                name: 'must|string|min:2|max:20|name=昵称',
-                realName: 'must|string|min:2|max:20|name=姓名',
-                gender: 'must|int|name=性别',
-                mobile: 'must|mobile|name=手机号',
-                city: 'string|max:100|name=城市',
-                desc: 'string|min:10|max:500|name=个人简介',
-                resource: 'string|max:500|name=可提供资源',
-                needs: 'string|max:500|name=需求和期望'
-            }, this);
-            if (!validData) return;
+
+            // 数据校验
+            let rules = {
+                name: 'required|string|min:2|max:20|name=昵称',
+                realName: 'required|string|min:2|max:20|name=姓名',
+                gender: 'required|int|in:1,2,3|name=性别',
+                mobile: 'required|mobile|name=手机',
+                city: 'required|string|min:2|max:100|name=城市',
+                desc: 'required|string|min:10|max:500|name=个人简介',
+                profession: 'required|string|min:2|max:20|name=职业',
+                status: 'required|string|min:2|max:20|name=状态',
+                contact: 'array|name=联系方式'
+            };
+
+            // 取得数据
+            data = validate.check(data, rules);
+            if (!data) return;
 
             let opts = {
                 title: '提交中'
             }
-            
-            if (!validData.name || validData.name.trim() === '') {
-                pageHelper.showModal('昵称不能为空');
-                return;
-            }
-
-            if (!validData.desc || validData.desc.trim().length < 10) {
-                pageHelper.showModal('自我介绍不能少于10个字');
-                return;
-            }
-
-            let params = {
-                name: validData.name.trim(),
-                realName: validData.realName.trim(),
-                gender: validData.gender,
-                mobile: validData.mobile.trim(),
-                city: validData.city.trim(),
-                desc: validData.desc.trim(),
-                resource: validData.resource ? validData.resource.trim() : '',
-                needs: validData.needs ? validData.needs.trim() : '',
-                pic: this.data.formData.pic || this.data.USER_PIC || '',
-                forms: this.data.formData.forms || []
-            }
-            
-            let result = await cloudHelper.callCloudSumbit('passport/edit_base', params, opts);
-
-            if (result && result.code === 200) {
-                pageHelper.showSuccToast('修改成功', 1500);
-                setTimeout(() => {
+            await cloudHelper.callCloudSumbit('passport/edit_base', data, opts).then(res => {
+                if (res.data.ret == 0) {
                     wx.navigateBack();
-                }, 1500);
-            }
-
+                }
+            });
         } catch (err) {
-            pageHelper.showModal('修改失败: ' + (err.message || err));
+            console.error(err);
         }
-    },
+    }
 });
