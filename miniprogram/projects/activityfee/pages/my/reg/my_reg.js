@@ -7,7 +7,7 @@ const contactConfig = require('../../../config/contact_config.js');
 
 Page({
 	data: {
-		isLoad: true,
+		isLoad: false,
 		isSubmitting: false,
 		hasUserInfo: false,
 		userPic: '',
@@ -19,8 +19,8 @@ Page({
 			realName: '',
 			userMobile: '',
 			city: '',
-			profession: 'other',
-			employmentStatus: 'employed',
+			profession: '',
+			employmentStatus: '',
 			desc: '',
 			resource: '',
 			needs: '',
@@ -33,30 +33,30 @@ Page({
             female: '女'
         },
         professionOptions: {
-            dev: '开发',
-            product: '产品',
-            design: '设计',
-            operation: '运营',
-            hardware: '硬件',
-            sales: '销售',
-            consulting: '咨询',
-            maintenance: '运维',
-            research: '研究',
-            media: '媒体',
-            investment: '投资',
-            legal: '法务',
-            teacher: '教师',
-            student: '学生',
-            art: '艺术',
-            other: '其他'
-        },
+			'dev': '开发',
+			'product': '产品',
+			'design': '设计',
+			'operation': '运营',
+			'hardware': '硬件',
+			'sales': '销售',
+			'consulting': '咨询',
+			'maintenance': '运维',
+			'research': '研究',
+			'media': '媒体',
+			'investment': '投资',
+			'legal': '法务',
+			'teacher': '教师',
+			'student': '学生',
+			'art': '艺术',
+			'other': '其他'
+		},
         statusOptions: {
-            employed: '在职',
-            startup: '创业',
-            freelance: '自由',
-            seeking: '求职',
-            student: '在校'
-        },
+			'employed': '在职',
+			'startup': '创业',
+			'freelance': '自由',
+			'seeking': '求职',
+			'student': '在校'
+		},
 		
 		contactCategories: contactConfig.CONTACT_CATEGORIES,
 		defaultContactIcon: contactConfig.DEFAULT_ICON,
@@ -76,8 +76,8 @@ Page({
 				realName: '',
 				userMobile: '',
 				city: '',
-				profession: 'other',
-				employmentStatus: 'employed',
+				profession: '',
+				employmentStatus: '',
 				desc: '',
 				resource: '',
 				needs: '',
@@ -329,6 +329,27 @@ Page({
 				}
 			}
 
+			// 获取英文值（反向映射）
+			const professionCn = data.formData.profession || '';
+			const employmentStatusCn = data.formData.employmentStatus || '';
+
+			// 反向映射函数：从中文找到对应的英文key
+			const getKeyByValue = (obj, value) => {
+				return Object.keys(obj).find(key => obj[key] === value);
+			};
+
+			// 转换为英文值
+			const professionEn = getKeyByValue(this.data.professionOptions, professionCn) || 'other';
+			const employmentStatusEn = getKeyByValue(this.data.statusOptions, employmentStatusCn) || 'employed';
+
+			// 打印详细日志
+			console.log('[Register Debug] 原始职业值(中文):', professionCn);
+			console.log('[Register Debug] 转换后职业值(英文):', professionEn);
+			console.log('[Register Debug] 职业映射:', this.data.professionOptions);
+			console.log('[Register Debug] 原始就业状态(中文):', employmentStatusCn);
+			console.log('[Register Debug] 转换后就业状态(英文):', employmentStatusEn);
+			console.log('[Register Debug] 就业状态映射:', this.data.statusOptions);
+
 			let params = {
 				userMobile: data.formData.userMobile,
 				userPic: data.userPic,
@@ -339,38 +360,47 @@ Page({
 				desc: data.formData.desc,
 				resource: data.formData.resource || '',
 				needs: data.formData.needs || '',
-				profession: data.formData.profession || '',
-				employmentStatus: data.formData.employmentStatus || '',
+				profession: professionEn,  // 使用转换后的英文值
+				employmentStatus: employmentStatusEn,  // 使用转换后的英文值
 				contactList: data.formData.contact || [],
-				forms: []
+				forms: [],
+				status: 1
 			};
 
 			let opts = {
 				title: '提交中'
 			}
 
-			let result = await cloudHelper.callCloudSumbit('passport/register', params, opts);
+			try {
+				console.log('[Register Params] 完整参数:', JSON.stringify(params, null, 2)); 
+				let result = await cloudHelper.callCloudSumbit('passport/register', params, opts);
 			
-			if (result && result.code === 200) {
-				if (result.data && result.data.token) {
-					PassportBiz.setToken(result.data.token);
-				}
-				
-				wx.showToast({
-					title: '注册成功',
-					icon: 'success',
-					duration: 1500,
-					mask: true,
-					complete: () => {
-						setTimeout(() => {
-							wx.switchTab({
-								url: '/projects/activityfee/pages/my/index/my_index'
-							});
-						}, 1500);
+				if (result && result.code === 200) {
+					if (result.data && result.data.token) {
+						PassportBiz.setToken(result.data.token);
 					}
-				});
-			} else {
-				throw new Error('注册返回数据异常');
+					
+					wx.showToast({
+						title: '注册成功',
+						icon: 'success',
+						duration: 1500,
+						mask: true,
+						complete: () => {
+							setTimeout(() => {
+								wx.switchTab({
+									url: '/projects/activityfee/pages/my/index/my_index'
+								});
+							}, 1500);
+						}
+					});
+				} else {
+					throw new Error('注册返回数据异常');
+				}
+			} catch (err) {
+				console.error('注册错误:', err);
+				pageHelper.showModal(err.msg || '注册失败，请重试');
+			} finally {
+				this.setData({ isSubmitting: false });
 			}
 		} catch (err) {
 			console.error('注册错误:', err);

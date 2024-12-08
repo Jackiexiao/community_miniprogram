@@ -29,10 +29,9 @@ Page({
         },
 
         genderOptions: {
-            unknown: '请选择性别',
+            unknown: '未知',
             male: '男',
             female: '女',
-            other: '其他'
         },
         professionOptions: {
             dev: '开发',

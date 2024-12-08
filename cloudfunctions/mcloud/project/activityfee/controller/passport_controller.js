@@ -12,6 +12,8 @@ class PassportController extends BaseProjectController {
 		let rules = {
 			cloudID: 'must|string|min:1|max:200|name=cloudID',
 		};
+		console.log('[Get Phone Controller] 接收到的数据:', this._request);
+		console.log('[Get Phone Controller] 验证规则:', rules);
 		let input = this.validateData(rules);
 
 		let service = new PassportService();
@@ -20,20 +22,23 @@ class PassportController extends BaseProjectController {
 
 	async register() {
 		let rules = {
-			name: 'must|string|min:1|max:30|name=昵称',
+			nickName: 'must|string|min:1|max:30|name=昵称',
 			realName: 'must|string|min:2|max:30|name=真实姓名',
-			mobile: 'must|mobile|name=手机',
-			pic: 'must|string|name=头像',
+			userMobile: 'must|mobile|name=手机',
+			userPic: 'must|string|name=头像',
 			gender: 'must|string|in:unknown,male,female,other|name=性别',
 			profession: 'must|string|in:dev,product,design,operation,hardware,sales,consulting,maintenance,research,media,investment,legal,teacher,student,art,other|name=职业领域',
 			city: 'must|string|min:2|max:50|name=城市',
 			desc: 'must|string|min:10|max:500|name=自我介绍',
 			resource: 'string|max:500|name=可分享资源',
 			needs: 'string|max:500|name=需求',
+			contactList: 'array|name=联系方式',
 			forms: 'array|name=表单',
 			employmentStatus: 'must|string|in:employed,startup,freelance,seeking,student|name=就业状态',
 			status: 'int|default=1'
 		};
+		console.log('[Register Controller] 接收到的数据:', this._request);
+		console.log('[Register Controller] 验证规则:', rules);
 		let input = this.validateData(rules);
 		await contentCheck.checkTextMultiClient(input);
 
@@ -43,19 +48,22 @@ class PassportController extends BaseProjectController {
 
 	async editBase() {
 		let rules = {
-			name: 'must|string|min:1|max:30|name=昵称',
+			nickName: 'must|string|min:1|max:30|name=昵称',
 			realName: 'must|string|min:2|max:30|name=真实姓名',
-			mobile: 'must|mobile|name=手机',
-			pic: 'must|string|name=头像',
+			userMobile: 'must|mobile|name=手机',
+			userPic: 'must|string|name=头像',
 			gender: 'must|string|in:unknown,male,female,other|name=性别',
 			profession: 'must|string|in:dev,product,design,operation,hardware,sales,consulting,maintenance,research,media,investment,legal,teacher,student,art,other|name=职业领域',
 			city: 'must|string|min:2|max:50|name=城市',
 			desc: 'must|string|min:10|max:500|name=自我介绍',
 			resource: 'string|max:500|name=可分享资源',
 			needs: 'string|max:500|name=需求',
+			contactList: 'array|name=联系方式',
 			forms: 'array|name=表单',
 			employmentStatus: 'must|string|in:employed,startup,freelance,seeking,student|name=就业状态',
 		};
+		console.log('[Edit Base Controller] 接收到的数据:', this._request);
+		console.log('[Edit Base Controller] 验证规则:', rules);
 		let input = this.validateData(rules);
 		await contentCheck.checkTextMultiClient(input);
 
@@ -68,7 +76,8 @@ class PassportController extends BaseProjectController {
 		let rules = {
 			userId: 'must|id',
 		};
-
+		console.log('[Get User Detail Controller] 接收到的数据:', this._request);
+		console.log('[Get User Detail Controller] 验证规则:', rules);
 		// 取得数据
 		let input = this.validateData(rules);
 
@@ -84,7 +93,8 @@ class PassportController extends BaseProjectController {
 			userId: 'must|id',
 			data: 'must|object'
 		};
-
+		console.log('[Edit User Controller] 接收到的数据:', this._request);
+		console.log('[Edit User Controller] 验证规则:', rules);
 		// 取得数据
 		let input = this.validateData(rules);
 
@@ -96,6 +106,8 @@ class PassportController extends BaseProjectController {
 
 	async login() {
 		let rules = {};
+		console.log('[Login Controller] 接收到的数据:', this._request);
+		console.log('[Login Controller] 验证规则:', rules);
 		let input = this.validateData(rules);
 
 		let service = new PassportService();

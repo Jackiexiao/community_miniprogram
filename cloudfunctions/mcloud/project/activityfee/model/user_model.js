@@ -23,6 +23,8 @@ UserModel.DB_STRUCTURE = {
 	USER_RESOURCE: 'string|false|comment=可分享的资源',
 	USER_NEEDS: 'string|false|comment=需求',
 
+	USER_CONTACT_LIST: 'array|true|default=[]|comment=联系方式列表',
+
 	USER_FORMS: 'array|true|default=[]',
 	USER_OBJ: 'object|true|default={}',
 

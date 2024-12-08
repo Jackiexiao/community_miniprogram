@@ -6,16 +6,19 @@ const cloudUtil = require('../../../framework/cloud/cloud_util.js');
 
 class PassportService extends BaseProjectService {
 	async register(userId, {
-		mobile,
-		name,
+		userMobile,
+		nickName,
 		realName,
-		pic,
+		userPic,
 		gender,
 		city,
 		desc,
 		resource,
 		needs,
 		forms,
+		profession,
+		employmentStatus,
+		contactList,
 		status
 	}) {
 		// Check if user exists
@@ -28,7 +31,7 @@ class PassportService extends BaseProjectService {
 
 		// Check if mobile is registered
 		where = {
-			USER_MOBILE: mobile
+			USER_MOBILE: userMobile
 		}
 		cnt = await UserModel.count(where);
 		if (cnt > 0) this.AppError('该手机已注册');
@@ -36,15 +39,18 @@ class PassportService extends BaseProjectService {
 		// Create new user
 		let data = {
 			USER_MINI_OPENID: userId,
-			USER_MOBILE: mobile,
-			USER_NAME: name,
+			USER_MOBILE: userMobile,
+			USER_NICK_NAME: nickName,
 			USER_REAL_NAME: realName,
-			USER_PIC: pic,
+			USER_PIC: userPic,
 			USER_GENDER: gender,
 			USER_CITY: city,
 			USER_DESC: desc,
-			USER_RESOURCE: resource,
-			USER_NEEDS: needs,
+			USER_RESOURCE: resource || '',
+			USER_NEEDS: needs || '',
+			USER_PROFESSION: profession,
+			USER_EMPLOYMENT_STATUS: employmentStatus,
+			USER_CONTACT_LIST: contactList || [],
 			USER_OBJ: dataUtil.dbForms2Obj(forms),
 			USER_FORMS: forms,
 			USER_STATUS: Number(status)
@@ -86,20 +92,23 @@ class PassportService extends BaseProjectService {
 	}
 
 	async editBase(userId, {
-		mobile,
+		userMobile,
 		name,
 		realName,
-		pic,
+		userPic,
 		gender,
 		city,
 		desc,
 		resource,
 		needs,
-		forms
+		forms,
+		profession,
+		employmentStatus,
+		contactList
 	}) {
 		// Check if mobile is used by others
 		let whereMobile = {
-			USER_MOBILE: mobile,
+			USER_MOBILE: userMobile,
 			USER_MINI_OPENID: ['<>', userId]
 		}
 		let cnt = await UserModel.count(whereMobile);
@@ -113,29 +122,32 @@ class PassportService extends BaseProjectService {
 		if (!user) return;
 
 		// Handle profile picture change
-		if (user.USER_PIC && user.USER_PIC != pic) {
+		if (user.USER_PIC && user.USER_PIC != userPic) {
 			cloudUtil.deleteFiles(user.USER_PIC);
 			let ActivityModel = require('../model/activity_model.js');
 			let wherePic = {
 				'ACTIVITY_USER_LIST.USER_MINI_OPENID': userId,
 			}
 			let dataPic = {
-				'ACTIVITY_USER_LIST.$.USER_PIC': pic
+				'ACTIVITY_USER_LIST.$.USER_PIC': userPic
 			}
 			ActivityModel.edit(wherePic, dataPic);
 		}
 
 		// Update user data
 		let data = {
-			USER_MOBILE: mobile,
+			USER_MOBILE: userMobile,
 			USER_NAME: name,
 			USER_REAL_NAME: realName,
-			USER_PIC: pic,
+			USER_PIC: userPic,
 			USER_GENDER: gender,
 			USER_CITY: city,
 			USER_DESC: desc,
-			USER_RESOURCE: resource,
-			USER_NEEDS: needs,
+			USER_RESOURCE: resource || '',
+			USER_NEEDS: needs || '',
+			USER_PROFESSION: profession,
+			USER_EMPLOYMENT_STATUS: employmentStatus,
+			USER_CONTACT_LIST: contactList || [],
 			USER_OBJ: dataUtil.dbForms2Obj(forms),
 			USER_FORMS: forms,
 		};
