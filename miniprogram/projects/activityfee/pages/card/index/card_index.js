@@ -5,6 +5,7 @@ Page({
 	data: {
 		isLoad: false,
 		_params: null,
+		isGridView: true, // 控制视图模式
 	},
 
 	onLoad: function (options) {
@@ -38,4 +39,10 @@ Page({
 	bindCommListCmpt: function (e) {
 		pageHelper.commListListener(this, e);
 	},
+
+	toggleView: function() {
+		this.setData({
+			isGridView: !this.data.isGridView
+		});
+	}
 });

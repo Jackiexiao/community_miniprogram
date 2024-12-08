@@ -1,13 +1,16 @@
 <view>
-	<cmpt-nav title="名片夹"></cmpt-nav>
-
 	<!-- 名片列表 -->
-	<view class="main">
+	<view >
 		<view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
 		<block wx:else>
 			<block wx:if="{{isLoad}}">
 				<cmpt-comm-list type="card-list" _params="{{_params}}" search="{{search||''}}" _menus="{{sortMenus}}" _items="{{sortItems}}" sortMenusDefaultIndex="0" route="card/list" topBottom="120" isTotalMenu="{{true}}" placeholder="搜索" bind:list="bindCommListCmpt">
-					<view class="card-list">
+					<view class="view-switch" bindtap="toggleView">
+						<text class="icon-{{isGridView ? 'list' : 'apps'}}"></text>
+						<text class="switch-text">{{isGridView ? '列表视图' : '网格视图'}}</text>
+					</view>
+					
+					<view class="card-list {{isGridView ? 'grid-view' : 'list-view'}}">
 						<view class="card-item" wx:for="{{dataList.list}}" wx:key="key" bindtap="url" data-url="../detail/card_detail?id={{item._id}}">
 							<image class="card-image loading" mode="aspectFill" lazy-load="{{true}}" src="{{item.USER_PIC}}" />
 							<view class="card-content">
