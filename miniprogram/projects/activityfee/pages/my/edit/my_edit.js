@@ -33,7 +33,26 @@ Page({
             male: '男',
             female: '女'
         },
-        professionOptions: {
+        professionOptions: ['开发', '产品', '设计', '运营', '硬件', '销售', '咨询', '维护', '研究', '媒体', '投资', '法务', '教师', '学生', '艺术', '其他'],
+        professionMap: {
+			'开发': 'dev',
+			'产品': 'product',
+			'设计': 'design',
+			'运营': 'operation',
+			'硬件': 'hardware',
+			'销售': 'sales',
+			'咨询': 'consulting',
+			'维护': 'maintenance',
+			'研究': 'research',
+			'媒体': 'media',
+			'投资': 'investment',
+			'法务': 'legal',
+			'教师': 'teacher',
+			'学生': 'student',
+			'艺术': 'art',
+			'其他': 'other'
+		},
+        professionMapReverse: {
 			'dev': '开发',
 			'product': '产品',
 			'design': '设计',
@@ -41,7 +60,7 @@ Page({
 			'hardware': '硬件',
 			'sales': '销售',
 			'consulting': '咨询',
-			'maintenance': '运维',
+			'maintenance': '维护',
 			'research': '研究',
 			'media': '媒体',
 			'investment': '投资',
@@ -59,7 +78,7 @@ Page({
 			{ key: 'hardware', value: '硬件' },
 			{ key: 'sales', value: '销售' },
 			{ key: 'consulting', value: '咨询' },
-			{ key: 'maintenance', value: '运维' },
+			{ key: 'maintenance', value: '维护' },
 			{ key: 'research', value: '研究' },
 			{ key: 'media', value: '媒体' },
 			{ key: 'investment', value: '投资' },
@@ -138,7 +157,7 @@ Page({
 				realName: user.USER_REAL_NAME || '',
 				userMobile: user.USER_MOBILE || '',
 				city: user.USER_CITY || '',
-				profession: user.USER_PROFESSION || '',  // 这里已经是英文代码
+				profession: this.data.professionMapReverse[user.USER_PROFESSION] || '其他',  // 转换为中文
 				employmentStatus: user.USER_EMPLOYMENT_STATUS || '',
 				desc: user.USER_DESC || '',
 				resource: user.USER_RESOURCE || '',
@@ -403,7 +422,7 @@ Page({
 				userMobile: this.data.formData.userMobile,
 				userPic: this.data.userPic,
 				gender: this.data.formData.gender,
-				profession: this.data.formData.profession,
+				profession: this.data.professionMap[this.data.formData.profession],  // 转换为英文
 				city: this.data.formData.city,
 				desc: this.data.formData.desc,
 				employmentStatus: this.data.formData.employmentStatus,
@@ -431,11 +450,6 @@ Page({
 			// 校验
 			data = validate.check(data, rules, this);
 			if (!data) return;
-
-			// 确保profession是英文代码
-			if (data.profession && !this.data.professionOptions[data.profession]) {
-				data.profession = this._getProfessionCode(data.profession);
-			}
 
 			console.log('[My Edit] 最终提交的数据:', data);
 
