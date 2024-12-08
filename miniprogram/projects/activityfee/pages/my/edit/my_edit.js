@@ -1,8 +1,10 @@
-const pageHelper = require('../../../../../helper/page_helper.js');
 const cloudHelper = require('../../../../../helper/cloud_helper.js');
+const pageHelper = require('../../../../../helper/page_helper.js');
 const validate = require('../../../../../helper/validate.js');
 const PassportBiz = require('../../../../../comm/biz/passport_biz.js');
 const projectSetting = require('../../../public/project_setting.js');
+const setting = require('../../../../../setting/setting.js');
+const config = require('../../../config/config.js');
 const contactConfig = require('../../../config/contact_config.js');
 
 Page({
@@ -33,68 +35,11 @@ Page({
             male: '男',
             female: '女'
         },
-        professionOptions: ['开发', '产品', '设计', '运营', '硬件', '销售', '咨询', '维护', '研究', '媒体', '投资', '法务', '教师', '学生', '艺术', '其他'],
-        professionMap: {
-			'开发': 'dev',
-			'产品': 'product',
-			'设计': 'design',
-			'运营': 'operation',
-			'硬件': 'hardware',
-			'销售': 'sales',
-			'咨询': 'consulting',
-			'维护': 'maintenance',
-			'研究': 'research',
-			'媒体': 'media',
-			'投资': 'investment',
-			'法务': 'legal',
-			'教师': 'teacher',
-			'学生': 'student',
-			'艺术': 'art',
-			'其他': 'other'
-		},
-        professionMapReverse: {
-			'dev': '开发',
-			'product': '产品',
-			'design': '设计',
-			'operation': '运营',
-			'hardware': '硬件',
-			'sales': '销售',
-			'consulting': '咨询',
-			'maintenance': '维护',
-			'research': '研究',
-			'media': '媒体',
-			'investment': '投资',
-			'legal': '法务',
-			'teacher': '教师',
-			'student': '学生',
-			'art': '艺术',
-			'other': '其他'
-		},
-        professionOptionsList: [
-			{ key: 'dev', value: '开发' },
-			{ key: 'product', value: '产品' },
-			{ key: 'design', value: '设计' },
-			{ key: 'operation', value: '运营' },
-			{ key: 'hardware', value: '硬件' },
-			{ key: 'sales', value: '销售' },
-			{ key: 'consulting', value: '咨询' },
-			{ key: 'maintenance', value: '维护' },
-			{ key: 'research', value: '研究' },
-			{ key: 'media', value: '媒体' },
-			{ key: 'investment', value: '投资' },
-			{ key: 'legal', value: '法务' },
-			{ key: 'teacher', value: '教师' },
-			{ key: 'student', value: '学生' },
-			{ key: 'art', value: '艺术' },
-			{ key: 'other', value: '其他' }
-		],
-        statusOptions: {
-			'employed': '在职',
-			'startup': '创业',
-			'freelance': '自由',
-			'seeking': '求职',
-			'student': '在校'
-		},
+        professionOptions: config.professionOptions,
+        professionMap: config.professionMap,
+        professionMapReverse: config.professionMapReverse,
+        professionOptionsList: config.professionOptionsList,
+        statusOptions: config.statusOptions,
 		
 		contactCategories: contactConfig.CONTACT_CATEGORIES,
 		defaultContactIcon: contactConfig.DEFAULT_ICON,

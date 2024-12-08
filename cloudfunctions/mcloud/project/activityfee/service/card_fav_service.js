@@ -20,7 +20,7 @@ class CardFavService extends BaseProjectService {
 			CARD_ID: cardId,
 			USER_ID: userId
 		}
-		let cnt = await this.count('card_fav', where);
+		let cnt = await this.count('fav', where);
 		if (cnt > 0) throw new Error('您已经收藏过此名片');
 
 		// 入库
@@ -29,7 +29,7 @@ class CardFavService extends BaseProjectService {
 			CARD_ID: cardId,
 			ADD_TIME: this._timestamp(),
 		}
-		await this.insert('card_fav', data);
+		await this.insert('fav', data);
 
 		// 更新名片收藏数
 		await this.inc('card', cardId, 'FAV_CNT');
@@ -41,10 +41,10 @@ class CardFavService extends BaseProjectService {
 			CARD_ID: cardId,
 			USER_ID: userId
 		}
-		let cnt = await this.count('card_fav', where);
+		let cnt = await this.count('fav', where);
 		if (cnt == 0) throw new Error('您还未收藏此名片');
 
-		await this.del('card_fav', where);
+		await this.del('fav', where);
 
 		// 更新名片收藏数
 		await this.inc('card', cardId, 'FAV_CNT', -1);
@@ -55,7 +55,7 @@ class CardFavService extends BaseProjectService {
 			CARD_ID: cardId,
 			USER_ID: userId
 		}
-		let cnt = await this.count('card_fav', where);
+		let cnt = await this.count('fav', where);
 		return cnt > 0;
 	}
 
@@ -81,7 +81,7 @@ class CardFavService extends BaseProjectService {
 		};
 
 		let result = await this.getListJoin({
-			from: 'card_fav',
+			from: 'fav',
 			joinParams,
 			where,
 			fields: 'card',

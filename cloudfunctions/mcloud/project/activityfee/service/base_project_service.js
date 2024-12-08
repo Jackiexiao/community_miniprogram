@@ -10,9 +10,33 @@ class BaseProjectService extends BaseService {
 		return util.getProjectId();
 	}
 
+	_getFullCollection(collection) {
+		return 'bx_' + collection;
+	}
+
+	async count(collection, where) {
+		return await dbUtil.count(this._getFullCollection(collection), where);
+	}
+
+	async insert(collection, data) {
+		return await dbUtil.insert(this._getFullCollection(collection), data);
+	}
+
+	async del(collection, where) {
+		return await dbUtil.del(this._getFullCollection(collection), where);
+	}
+
+	async inc(collection, where, field, val = 1) {
+		return await dbUtil.inc(this._getFullCollection(collection), where, field, val);
+	}
+
+	async getOne(collection, where, fields = '*', orderBy = {}) {
+		return await dbUtil.getOne(this._getFullCollection(collection), where, fields, orderBy);
+	}
+
 	async initSetup() {
 
-		let F = (c) => 'bx_' + c;
+		let F = (c) => this._getFullCollection(c);
 		const INSTALL_CL = 'setup_activityfee';
 		const COLLECTIONS = ['setup', 'admin', 'log', 'news', 'activity', 'activity_join', 'comment', 'fav', 'user', 'pay'];
 		// 默认图片为空，前端会显示占位图

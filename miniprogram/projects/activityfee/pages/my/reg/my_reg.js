@@ -1,9 +1,10 @@
-const pageHelper = require('../../../../../helper/page_helper.js');
 const cloudHelper = require('../../../../../helper/cloud_helper.js');
+const pageHelper = require('../../../../../helper/page_helper.js');
 const validate = require('../../../../../helper/validate.js');
 const PassportBiz = require('../../../../../comm/biz/passport_biz.js');
 const projectSetting = require('../../../public/project_setting.js');
 const contactConfig = require('../../../config/contact_config.js');
+const config = require('../../../config/config.js');
 
 Page({
 	data: {
@@ -32,31 +33,8 @@ Page({
             male: '男',
             female: '女'
         },
-        professionOptions: {
-			'dev': '开发',
-			'product': '产品',
-			'design': '设计',
-			'operation': '运营',
-			'hardware': '硬件',
-			'sales': '销售',
-			'consulting': '咨询',
-			'maintenance': '运维',
-			'research': '研究',
-			'media': '媒体',
-			'investment': '投资',
-			'legal': '法务',
-			'teacher': '教师',
-			'student': '学生',
-			'art': '艺术',
-			'other': '其他'
-		},
-        statusOptions: {
-			'employed': '在职',
-			'startup': '创业',
-			'freelance': '自由',
-			'seeking': '求职',
-			'student': '在校'
-		},
+        professionOptions: config.professionOptions,
+        statusOptions: config.statusOptions,
 		
 		contactCategories: contactConfig.CONTACT_CATEGORIES,
 		defaultContactIcon: contactConfig.DEFAULT_ICON,

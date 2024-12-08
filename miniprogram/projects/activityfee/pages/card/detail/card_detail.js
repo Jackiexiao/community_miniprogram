@@ -1,6 +1,7 @@
 const cloudHelper = require('../../../../../helper/cloud_helper.js');
 const pageHelper = require('../../../../../helper/page_helper.js');
 const ProjectBiz = require('../../../biz/project_biz.js');
+const config = require('../../../config/config.js');
 
 Page({
     data: {
@@ -8,36 +9,11 @@ Page({
         id: null,
         card: null,
         isFav: false,
-
-        professionMap: {
-            'dev': '开发',
-            'product': '产品',
-            'design': '设计',
-            'operation': '运营',
-            'hardware': '硬件',
-            'sales': '销售',
-            'consulting': '咨询',
-            'maintenance': '维护',
-            'research': '研究',
-            'media': '媒体',
-            'investment': '投资',
-            'legal': '法务',
-            'teacher': '教师',
-            'student': '学生',
-            'art': '艺术',
-            'other': '其他'
-        },
-
-        employmentStatusMap: {
-            'employed': '已就业',
-            'startup': '创业中',
-            'freelance': '自由职业',
-            'seeking': '求职中',
-            'student': '学生'
-        }
+        professionMap: config.professionOptions,
+        employmentStatusMap: config.statusOptions
     },
 
-    onLoad: async function (options) {
+    onLoad: function (options) {
         ProjectBiz.initPage(this);
         if (!options || !options.id) {
             pageHelper.showNoneToast('名片不存在');
@@ -47,7 +23,7 @@ Page({
         this.setData({
             id: options.id
         });
-        await this._loadDetail();
+        this._loadDetail();
     },
 
     _loadDetail: async function () {
@@ -76,8 +52,8 @@ Page({
                 card
             });
 
-            // 检查是否已收藏
-            this._loadFavStatus();
+            // 加载收藏状态
+            await this._loadFavStatus();
 
         } catch (err) {
             console.error('[Card Detail] 加载详情失败:', err);
@@ -90,16 +66,14 @@ Page({
     _loadFavStatus: async function() {
         try {
             let params = {
-                id: this.data.id
+                cardId: this.data.card.USER_ID  // 使用USER_ID作为cardId
             }
-            let res = await cloudHelper.callCloudData('card/fav_status', params);
-            console.log('[Card Detail] 获取到的收藏状态:', res);
+            let isFav = await cloudHelper.callCloudData('card/is_fav', params);
+            console.log('[Card Detail] 获取到的收藏状态:', isFav);
             
-            if (res) {
-                this.setData({
-                    isFav: true
-                });
-            }
+            this.setData({
+                isFav
+            });
         } catch (err) {
             console.error('[Card Detail] 加载收藏状态失败:', err);
         }
@@ -107,8 +81,8 @@ Page({
 
     onShareAppMessage: function () {
         return {
-            title: this.data.card.USER_NAME + '的名片',
-            path: '/pages/card/detail/card_detail?id=' + this.data.id
+            title: this.data.card.USER_NICK_NAME + '的名片',
+            path: '/pages/card/detail/card_detail?id=' + this.data.card.USER_ID  // 使用USER_ID作为分享链接的ID
         }
     },
 
@@ -125,9 +99,13 @@ Page({
     bindFavTap: async function() {
         try {
             let params = {
-                id: this.data.id
+                cardId: this.data.card.USER_ID  // 使用USER_ID作为cardId
             }
-            await cloudHelper.callCloudData('card/fav', params);
+            if (this.data.isFav) {
+                await cloudHelper.callCloudData('card/del_fav', params);
+            } else {
+                await cloudHelper.callCloudData('card/fav', params);
+            }
             
             this.setData({
                 isFav: !this.data.isFav

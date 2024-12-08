@@ -7,7 +7,7 @@ const BaseProjectService = require('./base_project_service.js');
 const util = require('../../../framework/utils/util.js');
 const dataUtil = require('../../../framework/utils/data_util.js');
 const UserModel = require('../model/user_model.js');
-const FavModel = require('../model/fav_model.js'); // 添加收藏模型
+const FavModel = require('../model/fav_model.js');
 
 class CardService extends BaseProjectService {
 
@@ -94,14 +94,13 @@ class CardService extends BaseProjectService {
 		return await UserModel.edit(id, { USER_STATUS: UserModel.STATUS.FORBID });
 	}
 
-	// 添加收藏相关的功能
+	// 收藏相关的功能
 	async isFav(userId, cardId) {
 		let where = {
 			USER_ID: userId,
 			CARD_ID: cardId
 		}
-		let cnt = await FavModel.count(where);
-		return cnt > 0;
+		return await FavModel.count(where) > 0;
 	}
 
 	async toggleFav(userId, cardId) {
@@ -109,6 +108,7 @@ class CardService extends BaseProjectService {
 			USER_ID: userId,
 			CARD_ID: cardId
 		}
+
 		let cnt = await FavModel.count(where);
 		if (cnt > 0) {
 			await FavModel.del(where);
@@ -117,7 +117,10 @@ class CardService extends BaseProjectService {
 			await FavModel.insert({
 				USER_ID: userId,
 				CARD_ID: cardId,
-				ADD_TIME: this._timestamp
+				ADD_TIME: this._timestamp,
+				EDIT_TIME: this._timestamp,
+				ADD_IP: this._ip,
+				EDIT_IP: this._ip
 			});
 			return true;
 		}

@@ -115,36 +115,35 @@ class CardController extends BaseProjectController {
 		await service.delCard(input.id);
 	}
 
-	/** 获取收藏状态 */
+	/** 是否收藏 */
 	async isFav() {
 		// 数据校验
 		let rules = {
-			cardId: 'must|id',
+			id: 'must|id',
 		};
 
 		// 取得数据
 		let input = this.validateData(rules);
 
 		let service = new CardService();
-		let isFav = await service.isFav(this._userId, input.cardId);
-
-		return isFav;
+		return await service.isFav(this._userId, input.id);
 	}
 
-	/** 切换收藏状态 */
-	async fav() {
+	/** 切换收藏 */
+	async toggleFav() {
+		let service = new PassportService();
+		await service.checkLogin(this._userId);
+
 		// 数据校验
 		let rules = {
-			cardId: 'must|id',
+			id: 'must|id',
 		};
 
 		// 取得数据
 		let input = this.validateData(rules);
 
-		let service = new CardService();
-		let result = await service.toggleFav(this._userId, input.cardId);
-
-		return result;
+		service = new CardService();
+		return await service.toggleFav(this._userId, input.id);
 	}
 }
 
