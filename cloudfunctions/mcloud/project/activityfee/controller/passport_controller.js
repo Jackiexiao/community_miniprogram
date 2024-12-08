@@ -62,29 +62,50 @@ class PassportController extends BaseProjectController {
 			forms: 'array|name=表单',
 			employmentStatus: 'must|string|in:employed,startup,freelance,seeking,student|name=就业状态',
 		};
-		console.log('[Edit Base Controller] 接收到的数据:', this._request);
+		console.log('[Edit Base Controller] 接收到的原始请求:', this._request);
 		console.log('[Edit Base Controller] 验证规则:', rules);
-		let input = this.validateData(rules);
-		await contentCheck.checkTextMultiClient(input);
 
-		let service = new PassportService();
-		return await service.editBase(this._userId, input);
+		try {
+			let input = this.validateData(rules);
+			console.log('[Edit Base Controller] 验证后的数据:', input);
+
+			await contentCheck.checkTextMultiClient(input);
+			console.log('[Edit Base Controller] 内容检查通过');
+
+			let service = new PassportService();
+			console.log('[Edit Base Controller] 开始调用service.editBase');
+			return await service.editBase(this._userId, input);
+		} catch (err) {
+			console.error('[Edit Base Controller] 错误:', err);
+			throw err;
+		}
 	}
 
 	async getUserDetail() {
 		// 数据校验
 		let rules = {
-			userId: 'must|id',
+			userId: 'must|id|name=用户ID',
 		};
-		console.log('[Get User Detail Controller] 接收到的数据:', this._request);
-		console.log('[Get User Detail Controller] 验证规则:', rules);
+		
+		console.log('[Passport Controller] getUserDetail - 接收到的请求:', this._request);
+		
 		// 取得数据
 		let input = this.validateData(rules);
+		console.log('[Passport Controller] getUserDetail - 验证后的数据:', input);
 
 		let service = new PassportService();
-		let result = await service.getUserDetail(input.userId);
-
-		return result;
+		let user = await service.getUser({
+			USER_ID: input.userId
+		});
+		
+		console.log('[Passport Controller] getUserDetail - 查询到的用户信息:', user);
+		
+		if (!user) {
+			this.AppError('用户不存在');
+			return;
+		}
+		
+		return user;
 	}
 
 	async editUser() {

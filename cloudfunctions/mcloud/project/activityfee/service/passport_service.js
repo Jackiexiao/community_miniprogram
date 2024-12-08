@@ -80,12 +80,19 @@ class PassportService extends BaseProjectService {
 		return await UserModel.getOne(where, fields);
 	}
 
+	async getUser(where) {
+		console.log('[Passport Service] getUser - 查询条件:', where);
+		let user = await UserModel.getOne(where);
+		console.log('[Passport Service] getUser - 查询结果:', user);
+		return user;
+	}
+
 	async getUserDetail(userId) {
 		let where = {
 			_id: userId
 		}
 		let fields = '*';
-		let user = await UserModel.getOne(where, fields);
+		let user = await this.getUser(where);
 		if (!user) return null;
 
 		return user;
@@ -93,7 +100,7 @@ class PassportService extends BaseProjectService {
 
 	async editBase(userId, {
 		userMobile,
-		name,
+		nickName,
 		realName,
 		userPic,
 		gender,
@@ -106,23 +113,46 @@ class PassportService extends BaseProjectService {
 		employmentStatus,
 		contactList
 	}) {
+		console.log('[Passport Service] editBase - 接收到的参数:', {
+			userId,
+			userMobile,
+			nickName,
+			realName,
+			userPic,
+			gender,
+			city,
+			desc,
+			resource,
+			needs,
+			forms,
+			profession,
+			employmentStatus,
+			contactList
+		});
+
 		// Check if mobile is used by others
 		let whereMobile = {
 			USER_MOBILE: userMobile,
 			USER_MINI_OPENID: ['<>', userId]
 		}
+		console.log('[Passport Service] editBase - 检查手机号:', whereMobile);
 		let cnt = await UserModel.count(whereMobile);
 		if (cnt > 0) this.AppError('该手机已注册');
 
 		let where = {
 			USER_MINI_OPENID: userId
 		}
+		console.log('[Passport Service] editBase - 查询用户:', where);
 
 		let user = await UserModel.getOne(where);
-		if (!user) return;
+		if (!user) {
+			console.error('[Passport Service] editBase - 未找到用户');
+			return;
+		}
 
 		// Handle profile picture change
 		if (user.USER_PIC && user.USER_PIC != userPic) {
+			console.log('[Passport Service] editBase - 头像变更，删除旧头像');
 			cloudUtil.deleteFiles(user.USER_PIC);
 			let ActivityModel = require('../model/activity_model.js');
 			let wherePic = {
@@ -131,13 +161,13 @@ class PassportService extends BaseProjectService {
 			let dataPic = {
 				'ACTIVITY_USER_LIST.$.USER_PIC': userPic
 			}
-			ActivityModel.edit(wherePic, dataPic);
+			await ActivityModel.edit(wherePic, dataPic);
 		}
 
 		// Update user data
 		let data = {
 			USER_MOBILE: userMobile,
-			USER_NAME: name,
+			USER_NICK_NAME: nickName,
 			USER_REAL_NAME: realName,
 			USER_PIC: userPic,
 			USER_GENDER: gender,
@@ -148,11 +178,13 @@ class PassportService extends BaseProjectService {
 			USER_PROFESSION: profession,
 			USER_EMPLOYMENT_STATUS: employmentStatus,
 			USER_CONTACT_LIST: contactList || [],
-			USER_OBJ: dataUtil.dbForms2Obj(forms),
-			USER_FORMS: forms,
+			USER_OBJ: dataUtil.dbForms2Obj(forms || []),
+			USER_FORMS: forms || [],
 		};
 
+		console.log('[Passport Service] editBase - 更新数据:', data);
 		await UserModel.edit(where, data);
+		console.log('[Passport Service] editBase - 更新成功');
 	}
 
 	async editUser(userId, data) {
