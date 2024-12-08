@@ -270,7 +270,7 @@ Page({
 				{ key: 'formData.gender', message: '请选择性别' },
 				{ key: 'formData.realName', message: '请填写真实姓名', minLen: 2, maxLen: 20 },
 				{ key: 'formData.city', message: '请填写城市', minLen: 2, maxLen: 20 },
-				{ key: 'formData.desc', message: '请填写自我介绍', minLen: 10, maxLen: 500 }
+				{ key: 'formData.desc', message: '请填写自我介绍(不少于10字)', minLen: 10, maxLen: 500 }
 			];
 
 			for (let rule of checkRules) {

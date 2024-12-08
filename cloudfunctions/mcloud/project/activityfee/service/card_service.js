@@ -34,7 +34,7 @@ class CardService extends BaseProjectService {
 			USER_LOGIN_TIME: 'desc'
 		};
 
-		let fields = 'USER_NAME,USER_REAL_NAME,USER_MOBILE,USER_PIC,USER_GENDER,USER_CITY,USER_DESC,USER_LOGIN_TIME,USER_ADD_TIME';
+		let fields = 'USER_NICK_NAME,USER_NAME,USER_REAL_NAME,USER_MOBILE,USER_PIC,USER_GENDER,USER_CITY,USER_DESC,USER_LOGIN_TIME,USER_ADD_TIME';
 
 		let result = await UserModel.getList(where, fields, orderBy, page, size, isTotal, oldTotal);
 

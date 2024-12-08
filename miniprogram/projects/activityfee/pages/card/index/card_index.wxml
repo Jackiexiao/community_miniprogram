@@ -14,7 +14,7 @@
 						<view class="card-item" wx:for="{{dataList.list}}" wx:key="key" bindtap="url" data-url="../detail/card_detail?id={{item._id}}">
 							<image class="card-image loading" mode="aspectFill" lazy-load="{{true}}" src="{{item.USER_PIC}}" />
 							<view class="card-content">
-								<view class="card-name">{{item.USER_NAME}}</view>
+								<view class="card-name">{{item.USER_NICK_NAME || item.USER_NAME}}</view>
 								<view class="card-desc">{{item.USER_DESC || '暂无简介'}}</view>
 							</view>
 						</view>

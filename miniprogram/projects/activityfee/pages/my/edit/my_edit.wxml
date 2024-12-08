@@ -74,7 +74,7 @@
 		</view>
 
 		<text class="form-title">
-			<text class="must">*</text>自我介绍
+			<text class="must">*</text>自我介绍(不少于10字)
 		</text>
 		<textarea placeholder="请简单介绍一下自己" value="{{formData.desc}}" bindinput="onInput" data-field="desc" maxlength="500" style="min-height:150rpx"></textarea>
 

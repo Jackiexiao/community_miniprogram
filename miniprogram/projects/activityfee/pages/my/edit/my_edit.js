@@ -93,7 +93,8 @@ Page({
 				USER_CITY: user.USER_CITY,
 				USER_PROFESSION: user.USER_PROFESSION,
 				USER_EMPLOYMENT_STATUS: user.USER_EMPLOYMENT_STATUS,
-				USER_NICK_NAME: user.USER_NICK_NAME
+				USER_NICK_NAME: user.USER_NICK_NAME,
+				USER_CONTACT_LIST: user.USER_CONTACT_LIST
 			});
 
 			// 设置用户基本信息
@@ -112,6 +113,7 @@ Page({
 			};
 			
 			console.log('[My Edit] 设置到页面的formData:', formData);
+			console.log('[My Edit] 设置到页面的contactList:', formData.contact);
 
 			this.setData({
 				isLoad: true,
@@ -371,12 +373,15 @@ Page({
 				city: this.data.formData.city,
 				desc: this.data.formData.desc,
 				employmentStatus: this.data.formData.employmentStatus,
-				resource: '',
-				needs: '',
-				contactList: [],
+				resource: this.data.formData.resource || '',
+				needs: this.data.formData.needs || '',
+				contactList: this.data.formData.contact || [],
 				forms: []
 			};
 			
+			console.log('[My Edit] 提交前的formData:', this.data.formData);
+			console.log('[My Edit] 提交前的contactList:', this.data.formData.contact);
+
 			// 数据校验
 			let rules = {
 				nickName: 'must|string|min:1|max:30|name=昵称',
@@ -388,6 +393,10 @@ Page({
 				city: 'must|string|min:2|max:50|name=城市',
 				desc: 'must|string|min:10|max:500|name=自我介绍',
 				employmentStatus: 'must|string|in:employed,startup,freelance,seeking,student|name=就业状态',
+				resource: 'string|max:500|name=可分享资源',
+				needs: 'string|max:500|name=需求',
+				contactList: 'array|name=联系方式',
+				forms: 'array|name=表单'
 			};
 
 			console.log('[My Edit] 提交前的数据:', data);
@@ -403,6 +412,7 @@ Page({
 			}
 			try {
 				await cloudHelper.callCloudSumbit('passport/edit_base', data, opts).then(res => {
+					console.log('[My Edit] 提交成功，返回数据:', res);
 					let callback = () => {
 						wx.navigateBack();
 					}

@@ -73,11 +73,14 @@ class PassportService extends BaseProjectService {
 	}
 
 	async getMyDetail(userId) {
+		console.log('[Passport Service] getMyDetail - 开始获取用户详情, userId:', userId);
 		let where = {
 			USER_MINI_OPENID: userId
 		}
-		let fields = 'USER_PIC,USER_MOBILE,USER_NAME,USER_REAL_NAME,USER_GENDER,USER_CITY,USER_DESC,USER_RESOURCE,USER_NEEDS,USER_FORMS,USER_OBJ,USER_STATUS,USER_CHECK_REASON'
-		return await UserModel.getOne(where, fields);
+		let fields = 'USER_PIC,USER_MOBILE,USER_NAME,USER_REAL_NAME,USER_GENDER,USER_CITY,USER_DESC,USER_RESOURCE,USER_NEEDS,USER_FORMS,USER_OBJ,USER_STATUS,USER_CHECK_REASON,USER_CONTACT_LIST,USER_PROFESSION,USER_EMPLOYMENT_STATUS,USER_NICK_NAME'
+		let user = await UserModel.getOne(where, fields);
+		console.log('[Passport Service] getMyDetail - 获取到的用户数据:', user);
+		return user;
 	}
 
 	async getUser(where) {
@@ -183,8 +186,8 @@ class PassportService extends BaseProjectService {
 		};
 
 		console.log('[Passport Service] editBase - 更新数据:', data);
-		await UserModel.edit(where, data);
-		console.log('[Passport Service] editBase - 更新成功');
+		let result = await UserModel.edit(where, data);
+		console.log('[Passport Service] editBase - 更新结果:', result);
 	}
 
 	async editUser(userId, data) {
