@@ -1,2 +1,18 @@
 <!--projects/activityfee/pages/card/list/card_list.wxml-->
 <text>projects/activityfee/pages/card/list/card_list.wxml</text>
+
+<view class="main-list">
+    <view class="list-item" wx:for="{{list}}" wx:key="_id" bindtap="url" data-url="../detail/card_detail?id={{item._id}}">
+        <view class="item-left">
+            <image class="avatar" mode="aspectFill" src="{{item.USER_PIC}}" />
+        </view>
+        <view class="item-right">
+            <view class="name">{{item.USER_NICK_NAME}}</view>
+            <view class="desc">{{item.USER_DESC}}</view>
+        </view>
+    </view>
+</view>
+
+<block wx:if="{{!list || list.length==0}}">
+    <view class="no-data">暂无名片</view>
+</block>

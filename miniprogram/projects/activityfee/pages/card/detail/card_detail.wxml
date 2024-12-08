@@ -1,62 +1,51 @@
-<view>
-	<view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
+<view class="main">
+    <view class="card-detail" wx:if="{{isLoad}}">
+        <!-- 头部个人信息 -->
+        <view class="header">
+            <image class="avatar" src="{{card.USER_PIC}}" mode="aspectFill"></image>
+            <view class="name-section">
+                <text class="nickname">{{card.USER_NICK_NAME}}</text>
+                <view class="tags">
+                    <text class="tag profession">{{professionMap[card.USER_PROFESSION]}}</text>
+                    <text class="tag status">{{employmentStatusMap[card.USER_EMPLOYMENT_STATUS]}}</text>
+                    <text class="tag location" wx:if="{{card.USER_CITY}}">{{card.USER_CITY}}</text>
+                    <text class="tag gender">{{card.USER_GENDER === 'male' ? '男' : '女'}}</text>
+                </view>
+            </view>
+        </view>
 
-	<view wx:elif="{{isLoad === null}}" class="margin-top load notexist text-l load-project">
-		<text class="text-grey">名片不存在或已被删除</text>
-	</view>
+        <!-- 个人描述 -->
+        <view class="section" wx:if="{{card.USER_DESC}}">
+            <view class="section-title">个人简介</view>
+            <view class="section-content">{{card.USER_DESC}}</view>
+        </view>
 
-	<view wx:else class="card-detail">
-		<view class="card-header">
-			<image class="avatar" mode="aspectFill" src="{{card.USER_PIC}}" />
-			<view class="info">
-				<view class="name">{{card.USER_NAME}}</view>
-				<view class="time">{{card.USER_ADD_TIME}}</view>
-			</view>
-		</view>
+        <!-- 联系方式 -->
+        <view class="section">
+            <view class="section-title">联系方式</view>
+            <view class="contact-item">
+                <text class="label">手机号码</text>
+                <text class="value">{{card.USER_MOBILE}}</text>
+            </view>
+        </view>
 
-		<view class="card-body">
-			<view class="section">
-				<view class="desc">{{card.USER_DESC || '暂无简介'}}</view>
-				<view class="city" wx:if="{{card.USER_CITY}}">
-					<text class="icon-location"></text>
-					<text>{{card.USER_CITY}}</text>
-				</view>
+        <!-- 加入时间 -->
+        <view class="section">
+            <view class="section-title">其他信息</view>
+            <view class="info-item">
+                <text class="label">加入时间</text>
+                <text class="value">{{card.USER_ADD_TIME}}</text>
+            </view>
+        </view>
 
-				<view class="profession-status" wx:if="{{card.USER_PROFESSION || card.USER_STATUS}}">
-					<text wx:if="{{card.USER_PROFESSION}}">{{card.USER_PROFESSION}}</text>
-					<text wx:if="{{card.USER_PROFESSION && card.USER_STATUS}}" class="separator">·</text>
-					<text wx:if="{{card.USER_STATUS}}">{{card.USER_STATUS}}</text>
-				</view>
-			</view>
+        <!-- 收藏按钮 -->
+        <view class="footer">
+            <button class="fav-btn {{isFav?'active':''}}" bindtap="bindFavTap">
+                <text class="icon">❤</text>
+                <text>{{isFav?'已收藏':'收藏'}}</text>
+            </button>
+        </view>
+    </view>
 
-			<view class="section" wx:if="{{card.USER_MOBILE}}">
-				<view class="item">
-					<text class="label">联系方式</text>
-					<text class="value">{{card.USER_MOBILE}}</text>
-				</view>
-			</view>
-
-			<view class="section contact-section" wx:if="{{card.contactList && card.contactList.length > 0}}">
-				<view class="title">联系方式</view>
-				<view class="contact-list">
-					<view class="contact-item" wx:for="{{card.contactList}}" wx:key="index" bindtap="copyContact" data-content="{{item.content}}">
-						<text class="{{item.icon}}"></text>
-						<text class="contact-category">{{item.category}}</text>
-						<text class="contact-content">{{item.content}}</text>
-						<text class="icon-copy"></text>
-					</view>
-				</view>
-			</view>
-
-			<view class="section" wx:if="{{card.USER_RESOURCE}}">
-				<view class="title">可提供资源</view>
-				<view class="content">{{card.USER_RESOURCE}}</view>
-			</view>
-
-			<view class="section" wx:if="{{card.USER_NEEDS}}">
-				<view class="title">需求</view>
-				<view class="content">{{card.USER_NEEDS}}</view>
-			</view>
-		</view>
-	</view>
+    <view wx:if="{{!isLoad}}" class="loading">加载中...</view>
 </view>
