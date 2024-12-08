@@ -47,6 +47,16 @@ Page({
                 return;
             }
 
+            // 处理社交媒体显示
+            if (card.USER_CONTACT_LIST) {
+                card.USER_CONTACT_LIST = this._processSocialMedia(card.USER_CONTACT_LIST);
+            }
+
+            // 格式化日期显示
+            if (card.USER_ADD_TIME) {
+                card.USER_ADD_TIME = card.USER_ADD_TIME.split(' ')[0];  // 只保留日期部分
+            }
+
             this.setData({
                 isLoad: true,
                 card
@@ -61,6 +71,24 @@ Page({
                 isLoad: null
             });
         }
+    },
+
+    _processSocialMedia: function(contactList) {
+        return contactList.map(item => {
+            // 根据内容类型设置是否显示内容
+            switch(item.category.toLowerCase()) {
+                case 'github':
+                case 'website':
+                case 'blog':
+                case 'wechat':
+                case 'email':
+                    item.showContent = true;
+                    break;
+                default:
+                    item.showContent = false;
+            }
+            return item;
+        });
     },
 
     _loadFavStatus: async function() {
@@ -92,6 +120,19 @@ Page({
             data: content,
             success: function() {
                 pageHelper.showSuccToast('已复制到剪贴板');
+            }
+        });
+    },
+
+    bindCopyTap: function(e) {
+        let text = e.currentTarget.dataset.text;
+        wx.setClipboardData({
+            data: text,
+            success: function() {
+                wx.showToast({
+                    title: '已复制',
+                    icon: 'success'
+                });
             }
         });
     },
