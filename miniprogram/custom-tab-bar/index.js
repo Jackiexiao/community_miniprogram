@@ -15,7 +15,6 @@ Component({
 
   lifetimes: {
     attached() {
-      console.log('[TabBar] Component attached');
       this.init();
     }
   },
@@ -25,7 +24,6 @@ Component({
       const data = e.currentTarget.dataset;
       const url = data.path;
       const index = data.index;
-      console.log('[TabBar] Switching to:', url, 'index:', index);
       
       this.setData({ selected: index });
       
@@ -40,10 +38,8 @@ Component({
     init() {
       const page = getCurrentPages().pop();
       const route = page ? '/' + page.route : '';
-      console.log('[TabBar] Current route:', route);
       
       const index = this.data.list.findIndex(item => item.pagePath === route);
-      console.log('[TabBar] Setting selected to:', index);
       
       if (index > -1) {
         this.setData({ selected: index });

@@ -24,12 +24,14 @@ class PassportController extends BaseProjectController {
 			realName: 'must|string|min:2|max:30|name=真实姓名',
 			mobile: 'must|mobile|name=手机',
 			pic: 'must|string|name=头像',
-			gender: 'must|int|in:0,1,2|name=性别',
+			gender: 'must|string|in:unknown,male,female,other|name=性别',
+			profession: 'must|string|in:dev,product,design,operation,hardware,sales,consulting,maintenance,research,media,investment,legal,teacher,student,art,other|name=职业领域',
 			city: 'must|string|min:2|max:50|name=城市',
 			desc: 'must|string|min:10|max:500|name=自我介绍',
 			resource: 'string|max:500|name=可分享资源',
 			needs: 'string|max:500|name=需求',
 			forms: 'array|name=表单',
+			employmentStatus: 'must|string|in:employed,startup,freelance,seeking,student|name=就业状态',
 			status: 'int|default=1'
 		};
 		let input = this.validateData(rules);
@@ -45,12 +47,14 @@ class PassportController extends BaseProjectController {
 			realName: 'must|string|min:2|max:30|name=真实姓名',
 			mobile: 'must|mobile|name=手机',
 			pic: 'must|string|name=头像',
-			gender: 'must|int|in:0,1,2|name=性别',
+			gender: 'must|string|in:unknown,male,female,other|name=性别',
+			profession: 'must|string|in:dev,product,design,operation,hardware,sales,consulting,maintenance,research,media,investment,legal,teacher,student,art,other|name=职业领域',
 			city: 'must|string|min:2|max:50|name=城市',
 			desc: 'must|string|min:10|max:500|name=自我介绍',
 			resource: 'string|max:500|name=可分享资源',
 			needs: 'string|max:500|name=需求',
 			forms: 'array|name=表单',
+			employmentStatus: 'must|string|in:employed,startup,freelance,seeking,student|name=就业状态',
 		};
 		let input = this.validateData(rules);
 		await contentCheck.checkTextMultiClient(input);

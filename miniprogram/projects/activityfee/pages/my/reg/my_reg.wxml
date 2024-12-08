@@ -5,7 +5,7 @@
 		</text>
 		<button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="bindChooseAvatar">
 			<view class="avatar-wrap">
-				<image wx:if="{{avatarUrl}}" class="avatar loading" src="{{avatarUrl}}" mode="aspectFill"></image>
+				<image wx:if="{{userPic}}" class="avatar loading" src="{{userPic}}" mode="aspectFill"></image>
 				<text wx:else class="icon-cameraadd"></text>
 			</view>
 			<view class="hint-desc">点击上传头像</view>
@@ -19,11 +19,11 @@
 		<text class="form-title">
 			<text class="must">*</text>手机号码
 		</text>
-		<block wx:if="{{!phone}}">
+		<block wx:if="{{!userMobile}}">
 			<button class="btn-get-info" open-type="getPhoneNumber" bindgetphonenumber="bindGetPhoneNumber">点击获取手机号码</button>
 		</block>
 		<block wx:else>
-			<view class="info-text">{{phone}}</view>
+			<view class="info-text">{{userMobile}}</view>
 		</block>
 
 		<text class="form-title">
@@ -35,13 +35,13 @@
 			<text class="must">*</text>性别
 		</text>
 		<view class="tags-group">
-			<view class="tag-item {{formData.gender === 1 ? 'active' : ''}}" 
+			<view class="tag-item {{formData.gender === 'male' ? 'active' : ''}}" 
 				bindtap="bindGenderSelect" 
 				data-value="1">男</view>
-			<view class="tag-item {{formData.gender === 2 ? 'active' : ''}}" 
+			<view class="tag-item {{formData.gender === 'female' ? 'active' : ''}}" 
 				bindtap="bindGenderSelect" 
 				data-value="2">女</view>
-			<view class="tag-item {{formData.gender === 3 ? 'active' : ''}}" 
+			<view class="tag-item {{formData.gender === 'other' ? 'active' : ''}}" 
 				bindtap="bindGenderSelect" 
 				data-value="3">其他</view>
 		</view>
@@ -66,11 +66,11 @@
 			<text class="must">*</text>目前状态
 		</text>
 		<view class="tags-group">
-			<view class="tag-item {{formData.statusText === item ? 'active' : ''}}" 
-				wx:for="{{statusOptions}}" 
-				wx:key="*this"
-				bindtap="bindStatusSelect" 
-				data-value="{{item}}">{{item}}</view>
+			<block wx:for="{{['employed', 'startup', 'freelance', 'seeking', 'student']}}" wx:key="*this">
+				<view class="tag-item {{formData.employmentStatus === item ? 'active' : ''}}" 
+					bindtap="bindStatusSelect" 
+					data-value="{{item}}">{{statusOptions[item]}}</view>
+			</block>
 		</view>
 
 		<text class="form-title">

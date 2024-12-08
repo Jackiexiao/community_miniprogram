@@ -1,4 +1,4 @@
-<view >
+<view class="main-edit">
     <!-- 加载中 -->
     <view wx:if="{{!isLoad}}" class="margin-top load loading text-l load-project"></view>
 
@@ -8,74 +8,111 @@
     </view>
 
     <!-- 编辑表单 -->
-    <view wx:else>
+    <view class="form-box shadow" wx:else>
         <form bindsubmit="bindFormSubmit">
-            <view class="form-box shadow">
-                <text class="form-title">
-                    <text class="must">*</text>昵称
-                </text>
-                <input type="nickname" placeholder="填写您的昵称" model:value="{{formData.name}}" maxlength="30" bindinput="onInput" data-field="name"></input>
-
-                <text class="form-title">
-                    <text class="must">*</text>真实姓名
-                </text>
-                <input placeholder="填写您的真实姓名" model:value="{{formData.realName}}" maxlength="30" bindinput="onInput" data-field="realName"></input>
-
-                <text class="form-title">
-                    <text class="must">*</text>性别
-                </text>
-                <view class="tags-group">
-                    <view class="tag-item {{formData.gender === 1 ? 'active' : ''}}" 
-                        bindtap="bindGenderSelect" 
-                        data-value="1">男</view>
-                    <view class="tag-item {{formData.gender === 2 ? 'active' : ''}}" 
-                        bindtap="bindGenderSelect" 
-                        data-value="2">女</view>
-                    <view class="tag-item {{formData.gender === 3 ? 'active' : ''}}" 
-                        bindtap="bindGenderSelect" 
-                        data-value="3">其他</view>
+            <!-- 基本信息 -->
+            <view class="form-group">
+                <view class="form-group-title">基本信息</view>
+                
+                <view class="form-item">
+                    <view class="title">
+                        <text class="must">*</text>昵称
+                    </view>
+                    <input type="nickname" placeholder="填写您的昵称" model:value="{{formData.name}}" maxlength="30" bindinput="onInput" data-field="name"></input>
                 </view>
 
-                <text class="form-title">
-                    <text class="must">*</text>手机号码
-                </text>
-                <input type="number" placeholder="填写您的手机号码" model:value="{{formData.mobile}}" maxlength="11" bindinput="onInput" data-field="mobile"></input>
-
-                <text class="form-title">
-                    <text class="must">*</text>城市
-                </text>
-                <input placeholder="填写您所在的城市" model:value="{{formData.city}}" maxlength="50" bindinput="onInput" data-field="city"></input>
-
-                <text class="form-title">
-                    <text class="must">*</text>职业领域
-                </text>
-                <view class="tags-group">
-                    <view class="tag-item {{formData.profession === item ? 'active' : ''}}" 
-                        wx:for="{{professionOptions}}" 
-                        wx:key="*this"
-                        bindtap="bindProfessionSelect" 
-                        data-value="{{item}}">{{item}}</view>
+                <view class="form-item">
+                    <view class="title">
+                        <text class="must">*</text>真实姓名
+                    </view>
+                    <input placeholder="填写您的真实姓名" model:value="{{formData.realName}}" maxlength="30" bindinput="onInput" data-field="realName"></input>
                 </view>
 
-                <text class="form-title">
-                    <text class="must">*</text>目前状态
-                </text>
-                <view class="tags-group">
-                    <view class="tag-item {{formData.status === item ? 'active' : ''}}" 
-                        wx:for="{{statusOptions}}" 
-                        wx:key="*this"
-                        bindtap="bindStatusSelect" 
-                        data-value="{{item}}">{{item}}</view>
+                <view class="form-item">
+                    <view class="title">
+                        <text class="must">*</text>性别
+                    </view>
+                    <view class="tag-group">
+                        <view wx:for="{{genderOptions}}" wx:key="*this" 
+                              class="tag {{formData.gender === index ? 'selected' : ''}}" 
+                              bindtap="bindGenderSelect" 
+                              data-value="{{index}}">{{item}}</view>
+                    </view>
                 </view>
 
-                <text class="form-title">
-                    <text class="must">*</text>自我介绍
-                </text>
-                <textarea placeholder="请简单介绍一下自己" model:value="{{formData.desc}}" maxlength="500" style="min-height:150rpx" bindinput="onInput" data-field="desc"></textarea>
+                <view class="form-item">
+                    <view class="title">
+                        <text class="must">*</text>手机号码
+                    </view>
+                    <input type="number" placeholder="填写您的手机号码" model:value="{{formData.userMobile}}" maxlength="11" bindinput="onInput" data-field="userMobile"></input>
+                </view>
 
-                <text class="form-title">联系方式</text>
+                <view class="form-item">
+                    <view class="title">
+                        <text class="must">*</text>城市
+                    </view>
+                    <input placeholder="填写您所在的城市" model:value="{{formData.city}}" maxlength="50" bindinput="onInput" data-field="city"></input>
+                </view>
+            </view>
+
+            <!-- 职业信息 -->
+            <view class="form-group">
+                <view class="form-group-title">职业信息</view>
+                
+                <view class="form-item">
+                    <view class="title">
+                        <text class="must">*</text>职业领域
+                    </view>
+                    <view class="tag-group">
+                        <view wx:for="{{professionOptions}}" wx:key="*this"
+                              class="tag {{formData.profession === index ? 'selected' : ''}}"
+                              bindtap="bindProfessionSelect"
+                              data-value="{{index}}">{{item}}</view>
+                    </view>
+                </view>
+
+                <view class="form-item">
+                    <view class="title">
+                        <text class="must">*</text>目前状态
+                    </view>
+                    <view class="tag-group">
+                        <view class="tag {{formData.statusText === item ? 'selected' : ''}}" 
+                            wx:for="{{statusOptions}}" 
+                            wx:key="*this"
+                            bindtap="bindStatusSelect" 
+                            data-value="{{item}}">{{item}}</view>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 个人介绍 -->
+            <view class="form-group">
+                <view class="form-group-title">个人介绍</view>
+                
+                <view class="form-item">
+                    <view class="title">
+                        <text class="must">*</text>自我介绍
+                    </view>
+                    <textarea placeholder="请简单介绍一下自己" model:value="{{formData.desc}}" maxlength="500" style="min-height:150rpx" bindinput="onInput" data-field="desc"></textarea>
+                </view>
+
+                <view class="form-item">
+                    <view class="title">可分享资源</view>
+                    <textarea placeholder="您可以分享的资源" model:value="{{formData.resource}}" maxlength="500" style="min-height:100rpx" bindinput="onInput" data-field="resource"></textarea>
+                </view>
+
+                <view class="form-item">
+                    <view class="title">需求</view>
+                    <textarea placeholder="您的需求" model:value="{{formData.needs}}" maxlength="500" style="min-height:100rpx" bindinput="onInput" data-field="needs"></textarea>
+                </view>
+            </view>
+
+            <!-- 联系方式 -->
+            <view class="form-group">
+                <view class="form-group-title">联系方式</view>
+                
                 <view class="contact-list">
-                    <view class="contact-item" wx:for="{{formData.contactList}}" wx:key="index">
+                    <view class="contact-item" wx:for="{{formData.contact}}" wx:key="index">
                         <text class="{{item.icon}}"></text>
                         <text class="contact-category">{{item.category}}</text>
                         <text class="contact-content">{{item.content}}</text>
@@ -86,53 +123,58 @@
                     <text class="icon-add"></text>
                     <text>添加联系方式</text>
                 </view>
-
-                <text class="form-title">可分享资源</text>
-                <textarea placeholder="您可以分享的资源" model:value="{{formData.resource}}" maxlength="500" style="min-height:100rpx" bindinput="onInput" data-field="resource"></textarea>
-
-                <text class="form-title">需求</text>
-                <textarea placeholder="您的需求" model:value="{{formData.needs}}" maxlength="500" style="min-height:100rpx" bindinput="onInput" data-field="needs"></textarea>
             </view>
 
-            <button class="btn-submit margin-top" form-type="submit">提交</button>
+            <!-- 提交按钮 -->
+            <view class="btn-group">
+                <button class="btn-submit" bindtap="bindSubmitForm" disabled="{{isSubmitting}}">
+                    {{isSubmitting ? '提交中...' : '保存修改'}}
+                </button>
+            </view>
         </form>
     </view>
-</view>
 
-<!-- 联系方式弹窗 -->
-<view class="modal" wx:if="{{showContactModal}}">
-    <view class="modal-mask" bindtap="cancelContact"></view>
-    <view class="modal-content">
-        <view class="modal-header">
-            <text>添加联系方式</text>
-            <text class="icon-close" bindtap="cancelContact"></text>
-        </view>
-        
-        <view class="modal-body">
-            <view class="section-title">
-                <text>选择类别</text>
-                <text class="toggle-btn" bindtap="toggleCategoryEdit">{{isEditingCategory ? '选择预设' : '自定义'}}</text>
-            </view>
+    <!-- 联系方式弹窗 -->
+    <view class="modal {{showContactModal ? 'show' : ''}}" catchtap="hideContactModal">
+        <view class="modal-content" catchtap="stopPropagation">
+            <view class="modal-title">添加联系方式</view>
+            <view class="modal-body">
+                <view class="modal-form-item">
+                    <view class="title">类别</view>
+                    <view class="tag-group">
+                        <view class="tag {{currentContact.category === index ? 'selected' : ''}}"
+                            wx:for="{{contactCategories}}"
+                            wx:key="index"
+                            bindtap="onContactInput"
+                            data-field="category"
+                            data-value="{{index}}">{{item.title}}</view>
+                        <view class="tag {{currentContact.category === 'custom' ? 'selected' : ''}}"
+                            bindtap="onContactInput"
+                            data-field="category"
+                            data-value="custom">自定义</view>
+                    </view>
+                </view>
 
-            <view class="category-list" wx:if="{{!isEditingCategory}}">
-                <view wx:for="{{contactCategories}}" wx:key="index" 
-                    class="category-item {{curContactCategory == index ? 'selected' : ''}}"
-                    bindtap="onContactCategoryTap" data-category="{{index}}">
-                    <text class="{{item}}"></text>
-                    <text>{{index}}</text>
+                <view class="modal-form-item" wx:if="{{currentContact.category === 'custom'}}">
+                    <view class="title">自定义类别</view>
+                    <input placeholder="请输入类别名称" 
+                        value="{{currentContact.customCategory}}"
+                        bindinput="onContactInput"
+                        data-field="customCategory"></input>
+                </view>
+
+                <view class="modal-form-item">
+                    <view class="title">内容</view>
+                    <input placeholder="请输入联系方式内容" 
+                        value="{{currentContact.content}}"
+                        bindinput="onContactInput"
+                        data-field="content"></input>
                 </view>
             </view>
-            <view class="custom-category" wx:else>
-                <input placeholder="输入自定义类别" bindinput="onCustomCategoryInput" value="{{customCategory}}" maxlength="10"/>
+            <view class="modal-footer">
+                <button class="btn-cancel" bindtap="hideContactModal">取消</button>
+                <button class="btn-confirm" bindtap="addContact">确定</button>
             </view>
-
-            <view class="section-title">内容</view>
-            <input class="content-input" placeholder="请输入内容" bindinput="onContactContentInput" value="{{curContactContent}}"/>
-        </view>
-
-        <view class="modal-footer">
-            <button class="btn-cancel" bindtap="cancelContact">取消</button>
-            <button class="btn-confirm" bindtap="saveContact">确定</button>
         </view>
     </view>
 </view>

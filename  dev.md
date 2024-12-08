@@ -2,6 +2,11 @@
 # 开发的常见问题
 
 
+## 命名
+
+ 1. 头像命名： 将 avatarUrl 改为 userPic
+ 2. 
+
 
 ## 微信小程序我怎么修改 navigationBarTitleText 的样式，我希望它字体更大，注意，我不想要自定义导航栏
 

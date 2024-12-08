@@ -10,14 +10,16 @@ UserModel.DB_STRUCTURE = {
 	USER_STATUS: 'int|true|default=1|comment=状态 0=待审核,1=正常,8=审核未过,9=禁用',
 	USER_CHECK_REASON: 'string|false|comment=审核未过的理由',
 
-	USER_NAME: 'string|false|comment=用户昵称',
+	USER_NICK_NAME: 'string|false|comment=用户昵称',
 	USER_REAL_NAME: 'string|true|comment=真实姓名',
 	USER_MOBILE: 'string|true|comment=联系电话',
 	USER_PIC: 'string|false|comment=头像',
-	USER_GENDER: 'int|true|default=0|comment=性别 0=未知 1=男 2=女',
+	USER_GENDER: 'string|true|default="unknown"|comment=性别',
+	USER_PROFESSION: 'string|true|default="other"|comment=职业领域',
 	USER_CITY: 'string|true|comment=所在城市',
 	USER_DESC: 'string|true|comment=自我介绍',
 
+	USER_EMPLOYMENT_STATUS: 'string|true|default="employed"|comment=就业状态',
 	USER_RESOURCE: 'string|false|comment=可分享的资源',
 	USER_NEEDS: 'string|false|comment=需求',
 

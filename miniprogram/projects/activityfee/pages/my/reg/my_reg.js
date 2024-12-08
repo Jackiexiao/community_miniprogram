@@ -8,30 +8,56 @@ const contactConfig = require('../../../config/contact_config.js');
 Page({
 	data: {
 		isLoad: true,
+		isSubmitting: false,
 		hasUserInfo: false,
-		avatarUrl: '',
+		userPic: '',
 		nickName: '',
-		phone: '',
+		userMobile: '',
 
 		formData: {
-			gender: '',
-			name: '',
+			gender: 'unknown',
 			realName: '',
-			mobile: '',
+			userMobile: '',
 			city: '',
-			profession: '',
-			status: '',
-			statusText: '', 
+			profession: 'other',
+			employmentStatus: 'employed',
 			desc: '',
 			resource: '',
 			needs: '',
 			contact: []
 		},
 
-		genderOptions: ['请选择性别', '男', '女', '其他'],
-		professionOptions: ['开发', '产品', '设计', '运营', '硬件', '销售', '咨询', '运维', '研究', '媒体', '投资', '法务', '教师', '学生', '艺术', '其他'],
-		statusOptions: ['在职', '创业', '自由', '求职', '在校'],
-
+		genderOptions: {
+            unknown: '未知',
+            male: '男',
+            female: '女'
+        },
+        professionOptions: {
+            dev: '开发',
+            product: '产品',
+            design: '设计',
+            operation: '运营',
+            hardware: '硬件',
+            sales: '销售',
+            consulting: '咨询',
+            maintenance: '运维',
+            research: '研究',
+            media: '媒体',
+            investment: '投资',
+            legal: '法务',
+            teacher: '教师',
+            student: '学生',
+            art: '艺术',
+            other: '其他'
+        },
+        statusOptions: {
+            employed: '在职',
+            startup: '创业',
+            freelance: '自由',
+            seeking: '求职',
+            student: '在校'
+        },
+		
 		contactCategories: contactConfig.CONTACT_CATEGORIES,
 		defaultContactIcon: contactConfig.DEFAULT_ICON,
 		
@@ -44,17 +70,14 @@ Page({
 	},
 
 	onLoad: function(options) {
-		// 初始化表单数据
 		this.setData({
 			formData: {
-				gender: '',
-				name: '',
+				gender: 'unknown',
 				realName: '',
-				mobile: '',
+				userMobile: '',
 				city: '',
-				profession: '',
-				status: '',
-				statusText: '', 
+				profession: 'other',
+				employmentStatus: 'employed',
 				desc: '',
 				resource: '',
 				needs: '',
@@ -65,70 +88,87 @@ Page({
 
 	bindChooseAvatar: async function(e) {
 		try {
-			if (e.detail.avatarUrl) {
-				this.setData({
-					hasUserInfo: true,
-					avatarUrl: e.detail.avatarUrl
-				});
-			} else {
+			if (!e.detail.avatarUrl) {
 				pageHelper.showModal('未获取到头像');
+				return;
 			}
+
+			const fs = wx.getFileSystemManager();
+			const fileInfo = await new Promise((resolve, reject) => {
+				fs.getFileInfo({
+					filePath: e.detail.avatarUrl,
+					success: resolve,
+					fail: reject
+				});
+			});
+
+			if (fileInfo.size > 2 * 1024 * 1024) { 
+				pageHelper.showModal('头像文件过大，请选择2MB以下的图片');
+				return;
+			}
+
+			this.setData({
+				hasUserInfo: true,
+				userPic: e.detail.avatarUrl
+			});
 		} catch (err) {
-			console.error(err);
+			console.error('头像选择错误:', err);
+			pageHelper.showModal('头像选择失败，请重试');
 		}
 	},
 
 	bindGetPhoneNumber: async function(e) {
+		if (this.data.isSubmitting) return;
+		
 		try {
 			let result = await PassportBiz.getPhone(e);
-			console.log('获取手机号返回结果:', result);
-			
-			if (!result) return;
+			if (!result || !result.phone) {
+				pageHelper.showModal('手机号码获取失败，请重试');
+				return;
+			}
+
+			if (!/^1[3-9]\d{9}$/.test(result.phone)) {
+				pageHelper.showModal('手机号码格式不正确');
+				return;
+			}
 			
 			this.setData({
-				phone: result.phone,
-				'formData.mobile': result.phone
+				userMobile: result.phone,
+				'formData.userMobile': result.phone
 			});
 			
 		} catch (err) {
-			console.error(err);
-			pageHelper.showModal('手机号码获取失败');
+			console.error('获取手机号错误:', err);
+			pageHelper.showModal('手机号码获取失败，请重试');
 		}
 	},
 
 	bindGenderSelect(e) {
-		// 将性别值映射为后端需要的格式 (0,1,2)
-		const genderMap = {
-			'1': 1, // 男
-			'2': 2, // 女
-			'3': 0  // 其他
-		};
+		if (this.data.isSubmitting) return;
 		const genderValue = e.currentTarget.dataset.value;
+		const genderMap = {
+			'1': 'male',
+			'2': 'female',
+			'3': 'other'
+		};
 		this.setData({
-			'formData.gender': genderMap[genderValue] || 0
+			'formData.gender': genderMap[genderValue] || 'unknown'
 		});
 	},
 
 	bindProfessionSelect(e) {
+		if (this.data.isSubmitting) return;
+		const professionKey = e.currentTarget.dataset.value;
 		this.setData({
-			'formData.profession': e.currentTarget.dataset.value
+			'formData.profession': professionKey
 		});
 	},
 
 	bindStatusSelect(e) {
-		// 将状态值转换为数字类型
-		// 在职=1, 创业=2, 自由=3, 求职=4, 在校=5
-		const statusMap = {
-			'在职': 1,
-			'创业': 2,
-			'自由': 3,
-			'求职': 4,
-			'在校': 5
-		};
-		const statusText = e.currentTarget.dataset.value;
+		if (this.data.isSubmitting) return;
+		const statusKey = e.currentTarget.dataset.value;
 		this.setData({
-			'formData.status': statusMap[statusText] || 1, // 默认为在职
-			'formData.statusText': statusText // 保存状态文本
+			'formData.employmentStatus': statusKey
 		});
 	},
 
@@ -153,10 +193,8 @@ Page({
 		const { field } = e.currentTarget.dataset;
 		let value = e.detail.value;
 		
-		// 如果是点击预设类别
 		if (field === 'category') {
 			value = e.currentTarget.dataset.value;
-			// 清空自定义类别
 			this.setData({
 				'currentContact.customCategory': ''
 			});
@@ -170,7 +208,6 @@ Page({
 	addContact() {
 		const { currentContact, contactCategories } = this.data;
 		
-		// 验证输入
 		if (!currentContact.category) {
 			wx.showToast({
 				title: '请选择类别',
@@ -195,14 +232,12 @@ Page({
 			return;
 		}
 
-		// 准备新的联系方式数据
 		const newContact = {
 			category: currentContact.category === 'custom' ? currentContact.customCategory : contactCategories[currentContact.category].title,
 			content: currentContact.content,
 			icon: currentContact.category === 'custom' ? this.data.defaultContactIcon : contactCategories[currentContact.category].icon
 		};
 
-		// 添加到联系方式列表
 		const contacts = this.data.formData.contact || [];
 		contacts.push(newContact);
 
@@ -229,50 +264,75 @@ Page({
 	onInput: function(e) {
 		const field = e.currentTarget.dataset.field;
 		const value = e.detail.value;
-		console.log('输入字段:', field, '值:', value);
-		this.setData({
-			[`formData.${field}`]: value
-		});
+		if (field === 'nickName') {
+			this.setData({
+				[field]: value
+			});
+		} else {
+			this.setData({
+				[`formData.${field}`]: value
+			});
+		}
 	},
 
 	bindSubmitForm: async function(e) {
 		try {
 			let data = this.data;
-			console.log('提交的表单数据:', data);
+			if (data.isSubmitting) return;
 
-			// 数据校验
+			// 数据校验 
+			let mobile = data.formData.userMobile;
+			if (mobile.length < 11)
+				return pageHelper.showModal('请填写正确的手机号码');
+			
 			let checkRules = [
-				{ key: 'avatarUrl', message: '请选择头像' },
-				{ key: 'nickName', message: '请填写昵称' },
-				{ key: 'phone', message: '请填写手机号' },
-				{ key: ['formData', 'gender'], message: '请选择性别' },
-				{ key: ['formData', 'realName'], message: '请填写真实姓名' },
-				{ key: ['formData', 'city'], message: '请填写城市' },
-				{ key: ['formData', 'desc'], message: '请填写自我介绍' }
+				{ key: 'userPic', message: '请选择头像' },
+				{ key: 'nickName', message: '请填写昵称', minLen: 2, maxLen: 20 },
+				{ key: 'formData.userMobile', message: '请填写手机号', pattern: /^1[3-9]\d{9}$/ },
+				{ key: 'formData.gender', message: '请选择性别' },
+				{ key: 'formData.realName', message: '请填写真实姓名', minLen: 2, maxLen: 20 },
+				{ key: 'formData.city', message: '请填写城市', minLen: 2, maxLen: 20 },
+				{ key: 'formData.desc', message: '请填写自我介绍', minLen: 10, maxLen: 500 }
 			];
 
 			for (let rule of checkRules) {
 				let value;
-				if (Array.isArray(rule.key)) {
+				if (rule.key.includes('.')) {
 					// 处理嵌套对象
-					value = rule.key.reduce((obj, key) => obj && obj[key], data);
+					value = rule.key.split('.').reduce((obj, key) => obj && obj[key], data);
 				} else {
-					// 处理顶层属性
 					value = data[rule.key];
 				}
 				
-				console.log(`检查字段 ${Array.isArray(rule.key) ? rule.key.join('.') : rule.key} 的值:`, value);
-				
 				if (!value || value.length === 0) {
-					return pageHelper.showModal(rule.message);
+					pageHelper.showModal(rule.message);
+					this.setData({ isSubmitting: false });
+					return;
+				}
+
+				if (rule.pattern && !rule.pattern.test(value)) {
+					pageHelper.showModal('请输入正确的' + rule.message.replace('请填写', ''));
+					this.setData({ isSubmitting: false });
+					return;
+				}
+
+				if (rule.minLen && value.length < rule.minLen) {
+					pageHelper.showModal(rule.message.replace('请填写', '') + `长度不能少于${rule.minLen}个字符`);
+					this.setData({ isSubmitting: false });
+					return;
+				}
+
+				if (rule.maxLen && value.length > rule.maxLen) {
+					pageHelper.showModal(rule.message.replace('请填写', '') + `长度不能超过${rule.maxLen}个字符`);
+					this.setData({ isSubmitting: false });
+					return;
 				}
 			}
 
-			// 提交数据
 			let params = {
-				mobile: data.phone,
-				pic: data.avatarUrl,
-				name: data.nickName,
+				userMobile: data.formData.userMobile,
+				userPic: data.userPic,
+				nickName: data.nickName,
 				realName: data.formData.realName,
 				gender: data.formData.gender,
 				city: data.formData.city,
@@ -280,55 +340,43 @@ Page({
 				resource: data.formData.resource || '',
 				needs: data.formData.needs || '',
 				profession: data.formData.profession || '',
-				status: data.formData.status || '',
-				statusText: data.formData.statusText || '', 
+				employmentStatus: data.formData.employmentStatus || '',
 				contactList: data.formData.contact || [],
 				forms: []
 			};
 
-			console.log('提交到后端的数据:', params);
-
 			let opts = {
 				title: '提交中'
 			}
-			try {
-				let result = await cloudHelper.callCloudSumbit('passport/register', params, opts);
-				console.log('注册返回结果:', result);
+
+			let result = await cloudHelper.callCloudSumbit('passport/register', params, opts);
+			
+			if (result && result.code === 200) {
+				if (result.data && result.data.token) {
+					PassportBiz.setToken(result.data.token);
+				}
 				
-				if (result && result.code === 200) {
-					// 如果有token就设置
-					if (result.data && result.data.token) {
-						PassportBiz.setToken(result.data.token);
+				wx.showToast({
+					title: '注册成功',
+					icon: 'success',
+					duration: 1500,
+					mask: true,
+					complete: () => {
+						setTimeout(() => {
+							wx.switchTab({
+								url: '/projects/activityfee/pages/my/index/my_index'
+							});
+						}, 1500);
 					}
-					
-					wx.showToast({
-						title: '注册成功',
-						icon: 'success',
-						duration: 1500,
-						mask: true,
-						complete: () => {
-							setTimeout(() => {
-								wx.switchTab({
-									url: '/projects/activityfee/pages/my/index/my_index'
-								});
-							}, 1500);
-						}
-					});
-				} else {
-					console.log('注册成功但返回数据异常:', result);
-					pageHelper.showModal('注册异常，请重试');
-				}
-			} catch (err) {
-				console.log('注册失败:', err);
-				if (err.msg) {
-					pageHelper.showModal(err.msg);
-				} else {
-					pageHelper.showModal('注册失败，请重试');
-				}
+				});
+			} else {
+				throw new Error('注册返回数据异常');
 			}
 		} catch (err) {
-			console.error(err);
-			pageHelper.showModal('系统错误，请重试');
+			console.error('注册错误:', err);
+			pageHelper.showModal(err.msg || '注册失败，请重试');
+		} finally {
+			this.setData({ isSubmitting: false });
 		}
 	}
-}) 
+})
